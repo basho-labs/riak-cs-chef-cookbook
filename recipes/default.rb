@@ -111,6 +111,6 @@ service "riak_moss" do
   supports :start => true, :stop => true, :restart => true
   action [ :enable ]
   subscribes :restart, resources(:template => [ "#{node[:moss][:package][:config_dir]}/app.config",
-                                  "#{node[:moss][:package][:config_dir]}/vm.args" ])
+                                   "#{node[:moss][:package][:config_dir]}/vm.args" ])
 end
 
