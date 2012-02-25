@@ -19,9 +19,9 @@
 
 default.moss.package.type = "binary"
 default.moss.package.version.major = "0"
-default.moss.package.version.minor = "0"
-default.moss.package.version.incremental = "3"
+default.moss.package.version.minor = "1"
+default.moss.package.version.incremental = "0"
 default.moss.package.version.build = "1"
-default.moss.package.source_checksum = '3bcaffe01d576eef5317c72e926896e199e04efe5064e5a790a0499f94b1ae3e'
+default.moss.package.source_checksum = 'f8786a3f55c622cd9de89ebcb7799abc268da7360e681ae716eac913c1d29159'
 default.moss.package.config_dir = "/etc/riak_moss"
-default.moss.package.secret_hash = "3bcaff"
+default.moss.package.secret_hash = "880e98"
