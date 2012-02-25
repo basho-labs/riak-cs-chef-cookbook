@@ -24,3 +24,6 @@ default.moss.riak_moss.riak_pb_port = 8087
 default.moss.riak_moss.auth_bypass = false
 default.moss.riak_moss.moss_root_host = "s3.amazonaws.com"
 default.moss.riak_moss.put_fsm_buffer_size_max = 10485760
+default.moss.riak_moss.stanchion_ip = "127.0.0.1"
+default.moss.riak_moss.stanchion_port = "8085"
+default.moss.riak_moss.stanchion_ssl = true
