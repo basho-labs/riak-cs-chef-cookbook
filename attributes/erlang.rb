@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: moss
+# Cookbook Name:: cs
 #
 # Copyright (c) 2011 Basho Technologies, Inc.
 #
@@ -17,11 +17,11 @@
 # limitations under the License.
 #
 
-default.moss.erlang.node_name = "moss@#{node.ipaddress}"
-default.moss.erlang.cookie = "moss"
-default.moss.erlang.kernel_polling = true
-default.moss.erlang.async_threads = 64
-default.moss.erlang.error_logger_warnings = :w
-default.moss.erlang.env_vars.ERL_MAX_PORTS = 4096
-default.moss.erlang.env_vars.ERL_FULLSWEEP_AFTER = 0
-default.moss.erlang.env_vars.ERL_CRASH_DUMP = "/var/log/riak_moss/erl_crash.dump"
+default.cs.erlang.node_name = "cs@#{node.ipaddress}"
+default.cs.erlang.cookie = "cs"
+default.cs.erlang.kernel_polling = true
+default.cs.erlang.async_threads = 64
+default.cs.erlang.error_logger_warnings = :w
+default.cs.erlang.env_vars.ERL_MAX_PORTS = 4096
+default.cs.erlang.env_vars.ERL_FULLSWEEP_AFTER = 0
+default.cs.erlang.env_vars.ERL_CRASH_DUMP = "/var/log/riak-cs/erl_crash.dump"

@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: moss
+# Cookbook Name:: cs
 #
 # Copyright (c) 2011 Basho Technologies, Inc.
 #
@@ -17,15 +17,15 @@
 # limitations under the License.
 #
 
-default.moss.lager.handlers.lager_console_backend = :info
-default.moss.lager.crash_log = "/var/log/riak_moss/crash.log"
-default.moss.lager.crash_log_count = 5
-default.moss.lager.crash_log_date = "$D0"
-default.moss.lager.crash_log_msg_size = 65536
-default.moss.lager.crash_log_size = 10485760
-default.moss.lager.error_logger_redirect = true 
+default.cs.lager.handlers.lager_console_backend = :info
+default.cs.lager.crash_log = "/var/log/riak-cs/crash.log"
+default.cs.lager.crash_log_count = 5
+default.cs.lager.crash_log_date = "$D0"
+default.cs.lager.crash_log_msg_size = 65536
+default.cs.lager.crash_log_size = 10485760
+default.cs.lager.error_logger_redirect = true 
 
 #The following two attributes are KEYLESS.
 #They hold these values:[NAME,LOG_LEVEL,SIZE,DATE_FORMAT,ROTATION_TO_KEEP]
-default.moss.lager.handlers.lager_file_backend.lager_error_log = ["/var/log/riak_moss/error.log", :error, 10485760, "$D0", 5]
-default.moss.lager.handlers.lager_file_backend.lager_console_log = ["/var/log/riak_moss/console.log", :info, 10485760, "$D0", 5]
+default.cs.lager.handlers.lager_file_backend.lager_error_log = ["/var/log/riak-cs/error.log", :error, 10485760, "$D0", 5]
+default.cs.lager.handlers.lager_file_backend.lager_console_log = ["/var/log/riak-cs/console.log", :info, 10485760, "$D0", 5]

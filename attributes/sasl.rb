@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: moss
+# Cookbook Name:: cs
 #
 # Copyright (c) 2011 Basho Technologies, Inc.
 #
@@ -17,4 +17,4 @@
 # limitations under the License.
 #
 
-default.moss.sasl.sasl_error_logger = false
+default.cs.sasl.sasl_error_logger = false
