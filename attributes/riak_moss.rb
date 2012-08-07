@@ -30,7 +30,7 @@ default.cs.riak_moss.stanchion_ssl = false
 default.cs.riak_moss.admin_key = "admin-key"
 default.cs.riak_moss.admin_secret = "admin-secret"
 
-default.cs.riak_moss.riakc_pool = : [128,0]
+default.cs.riak_moss.riakc_pool = [128,0]
 default.cs.riak_moss.access_log_flush_factor = 1
 default.cs.riak_moss.access_archive_period = 3600
 default.cs.riak_moss.storage_schedule = []
