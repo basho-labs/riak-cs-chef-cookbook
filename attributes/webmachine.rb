@@ -17,14 +17,4 @@
 # limitations under the License.
 #
 
-
-maintainer        "Basho Technologies, Inc."
-maintainer_email  "riak@basho.com"
-license           "Apache 2.0"
-description       "Installs and configures riak cs"
-version           "1.0.2"
-recipe            "cs", "Installs Riak CS"
-
-%w{ubuntu debian}.each do |os|
-  supports os
-end
+default.cs.webmachine.webmachine_logger_module = :riak_moss_access_logger

@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: moss
+# Cookbook Name:: cs
 #
 # Copyright (c) 2011 Basho Technologies, Inc.
 #
@@ -17,11 +17,11 @@
 # limitations under the License.
 #
 
-default.moss.package.type = "binary"
-default.moss.package.version.major = "0"
-default.moss.package.version.minor = "1"
-default.moss.package.version.incremental = "0"
-default.moss.package.version.build = "1"
-default.moss.package.source_checksum = 'f8786a3f55c622cd9de89ebcb7799abc268da7360e681ae716eac913c1d29159'
-default.moss.package.config_dir = "/etc/riak_moss"
-default.moss.package.secret_hash = "880e98"
+default.cs.package.config_dir = "/etc/riak-cs"
+default.cs.package.type = "binary"
+default.cs.package.version.major = "1"
+default.cs.package.version.minor = "0"
+default.cs.package.version.incremental = "2"
+default.cs.package.version.build = "1"
+default.cs.package.source_checksum = 'b4badb32590ba30e2e8c311bb9f812a64843c0ad7d2473cf4615896c123abab0'
+default.cs.package.secret_hash = "13c531"

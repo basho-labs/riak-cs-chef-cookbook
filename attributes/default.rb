@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: moss
+# Cookbook Name:: cs
 #
 # Copyright (c) 2011 Basho Technologies, Inc.
 #
@@ -17,7 +17,8 @@
 # limitations under the License.
 #
 
-include_attribute "moss::riak_moss"
-include_attribute "moss::lager"
-include_attribute "moss::sasl"
-include_attribute "moss::erlang"
+include_attribute "cs::riak_moss"
+include_attribute "cs::lager"
+include_attribute "cs::sasl"
+include_attribute "cs::erlang"
+include_attribute "cs::webmachine"
