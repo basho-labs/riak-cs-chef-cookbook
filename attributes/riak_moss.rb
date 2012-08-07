@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: moss
+# Cookbook Name:: cs
 #
 # Copyright (c) 2011 Basho Technologies, Inc.
 #
@@ -17,13 +17,21 @@
 # limitations under the License.
 #
 
-default.moss.riak_moss.moss_ip = "127.0.0.1"
-default.moss.riak_moss.moss_port = 8080
-default.moss.riak_moss.riak_ip = "127.0.0.1"
-default.moss.riak_moss.riak_pb_port = 8087
-default.moss.riak_moss.auth_bypass = false
-default.moss.riak_moss.moss_root_host = "s3.amazonaws.com"
-default.moss.riak_moss.put_fsm_buffer_size_max = 10485760
-default.moss.riak_moss.stanchion_ip = "127.0.0.1"
-default.moss.riak_moss.stanchion_port = "8085"
-default.moss.riak_moss.stanchion_ssl = true
+default.cs.riak_moss.moss_ip = "127.0.0.1"
+default.cs.riak_moss.moss_port = 8080
+default.cs.riak_moss.riak_ip = "127.0.0.1"
+default.cs.riak_moss.riak_pb_port = 8087
+default.cs.riak_moss.auth_bypass = false
+default.cs.riak_moss.moss_root_host = "s3.amazonaws.com"
+default.cs.riak_moss.put_fsm_buffer_size_max = 10485760
+default.cs.riak_moss.stanchion_ip = "127.0.0.1"
+default.cs.riak_moss.stanchion_port = 8085
+default.cs.riak_moss.stanchion_ssl = false
+default.cs.riak_moss.admin_key = "admin-key"
+default.cs.riak_moss.admin_secret = "admin-secret"
+
+default.cs.riak_moss.riakc_pool = : [128,0]
+default.cs.riak_moss.access_log_flush_factor = 1
+default.cs.riak_moss.access_archive_period = 3600
+default.cs.riak_moss.storage_schedule = []
+default.cs.riak_moss.storage_archive_period = 86400

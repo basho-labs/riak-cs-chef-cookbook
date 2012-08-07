@@ -1,7 +1,7 @@
 require 'delegate'
-module MossTemplateHelper
+module CSTemplateHelper
   class Tuple < DelegateClass(Array)
-    include MossTemplateHelper
+    include CSTemplateHelper
     def to_s
       "{" << map {|i| value_to_erlang(i) }.join(", ") << "}"
     end
@@ -28,6 +28,8 @@ module MossTemplateHelper
       if KEYLESS_ATTRIBUTES.include?(k)
         #We make the assumption that all KEYLESS_ATTRIBUTES are arrays. 
         Tuple.new(v).to_s
+      elsif TUPLE_IN_TUPLE.include?(k)
+        "{#{k},{#{v[0]},#{v[1]}}}"
       else
         "{#{k}, #{value_to_erlang(v, depth)}}"
       end
@@ -39,22 +41,23 @@ module MossTemplateHelper
   #A sample of this wold be the lager configuration. 
   #{"{{platform_log_dir}}/error.log", error, 10485760, "$D0", 5}
   KEYLESS_ATTRIBUTES = ['lager_error_log','lager_console_log']
+  TUPLE_IN_TUPLE = ['riakc_pool']
   
   #Remove these configs. This will make sure package and erlang vms are not processed into the riak app.config. 
-  MOSS_REMOVE_CONFIGS = ['package', 'erlang']
+  CS_REMOVE_CONFIGS = ['package', 'erlang']
   
-  def process_app_config(moss)
+  def process_app_config(cs)
     # Don't muck with the node attributes
-    moss = moss.to_hash
+    cs = cs.to_hash
 
     # Remove sections we don't care about
-    moss.reject! {|k,_| MOSS_REMOVE_CONFIGS.include? k }
+    cs.reject! {|k,_| CS_REMOVE_CONFIGS.include? k }
 
     # Return the sanitized config
-    moss
+    cs
   end
 
-  MOSS_VM_ARGS = {
+  CS_VM_ARGS = {
     "node_name" => "-name",
     "cookie" => "-setcookie",
     "heart" => "-heart",
@@ -66,7 +69,7 @@ module MossTemplateHelper
     
   def setup_vm_args(config)
     config.map do |k,v|
-      key = MOSS_VM_ARGS[k.to_s]
+      key = CS_VM_ARGS[k.to_s]
       case v
       when false
         nil
@@ -81,9 +84,9 @@ module MossTemplateHelper
 end
 
 class Chef::Resource::Template
-  include MossTemplateHelper
+  include CSTemplateHelper
 end
 
 class Erubis::Context
-  include MossTemplateHelper
+  include CSTemplateHelper
 end
