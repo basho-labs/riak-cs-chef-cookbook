@@ -31,6 +31,7 @@ else
     base_uri = "#{base_uri}ubuntu/#{node[:lsb][:codename]}/" if [:platform_version]!="11.10"
   when "redhat","centos","scientific","fedora","suse"
     machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
+    base_uri = "#{base_uri}#{node[:platform_family]}/#{node[:platform_version].to_i}/"
   end
   package_file =  case node[:cs][:package][:type]
                   when "binary"
@@ -96,7 +97,9 @@ package package_name do
     [ "ubuntu", "debian" ] => {"default" => Chef::Provider::Package::Dpkg},
     [ "redhat", "centos", "fedora", "suse" ] => {"default" => Chef::Provider::Package::Rpm}
   )
-  options "--force-confdef --force-confold"
+  case node[:platform] when "ubuntu","debian"
+    options "--force-confdef --force-confold" 
+  end
   action :install
 end
 

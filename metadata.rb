@@ -25,6 +25,6 @@ description       "Installs and configures riak cs"
 version           "1.0.2"
 recipe            "cs", "Installs Riak CS"
 
-%w{ubuntu debian}.each do |os|
+%w{ubuntu debian rhel centos}.each do |os|
   supports os
 end
