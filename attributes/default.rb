@@ -25,7 +25,7 @@ default['cs']['args']['+A'] = 64
 default['cs']['args']['+W'] = "w"
 default['cs']['args']['-env']['ERL_MAX_PORTS'] = 4096
 default['cs']['args']['-env']['ERL_FULLSWEEP_AFTER'] = 0
-default['cs']['args']['-env']['ERL_CRASH_DUMP'] = "/var/log/riak/erl_crash.dump"
+default['cs']['args']['-env']['ERL_CRASH_DUMP'] = "/var/log/riak-cs/erl_crash.dump"
 
 # app.config
 class ::String
@@ -50,7 +50,7 @@ default['cs']['config']['riak_moss']['admin_key'] = "admin-key".to_erl_string
 default['cs']['config']['riak_moss']['admin_secret'] = "admin-secret".to_erl_string
 default['cs']['config']['riak_moss']['stanchion_ip'] = "#{node['ipaddress']}".to_erl_string
 default['cs']['config']['riak_moss']['stanchion_port'] = 8085
-default['cs']['config']['riak_moss']['stanchion_ssl'] = "false"
+default['cs']['config']['riak_moss']['stanchion_ssl'] = false
 default['cs']['config']['riak_moss']['access_log_flush_factor'] = 1
 default['cs']['config']['riak_moss']['access_log_flush_size'] = 1000000
 default['cs']['config']['riak_moss']['access_archive_period'] = 3600
@@ -68,10 +68,10 @@ default['cs']['config']['riak_moss']['dtrace_support'] = false
 default['cs']['config']['webmachine']['webmachine_logger_module'] = "riak_moss_access_logger"
 
 # lager
-error_log = ["/var/log/riak/error.log".to_erl_string,"error",10485760,"$D0".to_erl_string,5].to_erl_tuple
-info_log = ["/var/log/riak/console.log".to_erl_string,"info",10485760,"$D0".to_erl_string,5].to_erl_tuple
+error_log = ["/var/log/riak-cs/error.log".to_erl_string,"error",10485760,"$D0".to_erl_string,5].to_erl_tuple
+info_log = ["/var/log/riak-cs/console.log".to_erl_string,"info",10485760,"$D0".to_erl_string,5].to_erl_tuple
 default['cs']['config']['lager']['handlers']['lager_file_backend'] = [error_log, info_log]
-default['cs']['config']['lager']['crash_log'] = "/var/log/riak/crash.log".to_erl_string
+default['cs']['config']['lager']['crash_log'] = "/var/log/riak-cs/crash.log".to_erl_string
 default['cs']['config']['lager']['crash_log_msg_size'] = 65536
 default['cs']['config']['lager']['crash_log_size'] = 10485760
 default['cs']['config']['lager']['crash_log_date'] = "$D0".to_erl_string

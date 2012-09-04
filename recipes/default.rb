@@ -17,12 +17,12 @@
 # limitations under the License.
 #
 
-version_str = "#{node['cs']['package']['version']['major']}.#{node['cs']['package']['version']['minor']}"
-base_uri = "http://private.downloads.basho.com/riak-cs/#{node['cs']['package']['secret_hash']}/#{version_str}.#{node['cs']['package']['version']['incremental']}/"
-base_filename = "riak-cs-#{version_str}.#{node['cs']['package']['version']['incremental']}"
+version_str = "#{node['cs']['package']['version']['major']}.#{node['cs']['package']['version']['minor']}.#{node['cs']['package']['version']['incremental']}"
+base_uri = "http://private.downloads.basho.com/riak-cs/#{node['cs']['package']['secret_hash']}/#{version_str}/"
+base_filename = "riak-cs-#{version_str}"
   
 case node['cs']['package']['type']
-  when "binary"  
+  when "binary"
     case node['platform']
     when "ubuntu"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
