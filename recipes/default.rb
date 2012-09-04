@@ -43,8 +43,6 @@ case node['cs']['package']['type']
     end
   when "source"
     package_file = "#{base_filename.sub(/\-/, '_')}.tar.gz"
-    node['cs']['package']['prefix'] = "/usr/local"
-    node['cs']['package']['config_dir'] = node['cs']['package']['prefix'] + "/riak/etc"
   end
 
 package_uri = base_uri + package_file
