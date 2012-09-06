@@ -58,18 +58,12 @@ user "riakcs" do
   system true
 end
 
-directory "/tmp/cs_pkg" do
-  owner "root"
-  mode 0755
-  action :create
-end
-
-remote_file "/tmp/cs_pkg/#{package_file}" do
+remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
   source package_uri
   owner "root"
   mode 0644
   checksum node['cs']['package']['source_checksum']
-  not_if { File.exists?("/tmp/cs_pkg/#{package_file}") }
+  not_if { File.exists?("#{Chef::Config[:file_cache_path]}#{package_file}") }
 end
 
 directory node['cs']['package']['config_dir'] do
@@ -78,15 +72,8 @@ directory node['cs']['package']['config_dir'] do
   action :create
 end
 
-# workaround deb issue by creating file in config dir
-#file "#{node['cs']['package']['config_dir']}/touch" do
-#  owner "root"
-#  mode "0755"
-#  action :create
-#end
-
 package package_name do
-  source "/tmp/cs_pkg/#{package_file}"
+  source "#{Chef::Config[:file_cache_path]}/#{package_file}"
   provider value_for_platform(
     [ "ubuntu", "debian" ] => {"default" => Chef::Provider::Package::Dpkg},
     [ "redhat", "centos", "fedora", "suse" ] => {"default" => Chef::Provider::Package::Rpm}
@@ -96,11 +83,6 @@ package package_name do
   end
   action :install
 end
-
-# cleanup workaround
-#file "#{node['cs']['package']['config_dir']}/touch" do
-#  action :delete
-#end
 
 file "#{node['cs']['package']['config_dir']}/app.config" do
   content Eth::Config.new(node['cs']['config'].to_hash).pp
@@ -114,11 +96,9 @@ file "#{node['cs']['package']['config_dir']}/vm.args" do
   mode 0644
 end
 
-
 service "riak-cs" do
   supports :start => true, :stop => true, :restart => true
   action [:enable, :start]
   subscribes :restart, resources(:file => [ "#{node['cs']['package']['config_dir']}/app.config",
                                    "#{node['cs']['package']['config_dir']}/vm.args" ])
 end
-
