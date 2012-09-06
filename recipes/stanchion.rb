@@ -17,8 +17,9 @@
 # limitations under the License.
 #
 
-version_str = "#{node['stanchion']['package']['version']['major']}.#{node['stanchion']['package']['version']['minor']}.#{node['stanchion']['package']['version']['incremental']}"
-base_uri = "http://private.downloads.basho.com/stanchion/#{node['stanchion']['package']['secret_hash']}/#{version_str}/"
+# riak-cs and stanchion are always released in step, hence using the cs version attributes
+version_str = "#{node['cs']['package']['version']['major']}.#{node['cs']['package']['version']['minor']}.#{node['cs']['package']['version']['incremental']}"
+base_uri = "http://private.downloads.basho.com/stanchion/#{node['cs']['package']['secret_hash']}/#{version_str}/"
 base_filename = "stanchion-#{version_str}"
 
 case node['stanchion']['package']['type']
