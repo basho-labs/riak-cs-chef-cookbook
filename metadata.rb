@@ -2,7 +2,7 @@
 # Author::Sean Carey (<densone@basho.com>)
 # Cookbook Name:: cs
 #
-# Copyright (c) 2011 Basho Technologies, Inc.
+# Copyright (c) 2012 Basho Technologies, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ maintainer        "Basho Technologies, Inc."
 maintainer_email  "riak@basho.com"
 license           "Apache 2.0"
 description       "Installs and configures riak cs"
-version           "1.0.2"
+version           "1.1.0"
 recipe            "cs", "Installs Riak CS"
 
 %w{ubuntu debian rhel centos}.each do |os|
