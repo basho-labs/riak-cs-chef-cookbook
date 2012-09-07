@@ -29,19 +29,19 @@ case node['stanchion']['package']['type']
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
       base_uri = "#{base_uri}#{node['platform']}/#{node['lsb']['codename']}/"
       package "libssl0.9.8"
-      package_file = "#{base_filename.gsub(/\-/, '_')}-#{node['stanchion']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"  
+      package_file = "#{base_filename.gsub(/\-/, '_')}-#{node['cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"  
     when "debian"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
       base_uri = "#{base_uri}#{node['platform']}/squeeze/"
-      package_file = "#{base_filename.gsub(/\-/, '_')}-#{node['stanchion']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
+      package_file = "#{base_filename.gsub(/\-/, '_')}-#{node['cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
     when "redhat","centos"
       machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
       base_uri = "#{base_uri}rhel/#{node['platform_version'].to_i}/"
-      package_file = "#{base_filename}-#{node['stanchion']['package']['version']['build']}.el#{node['platform_version'].to_i}.#{machines[node['kernel']['machine']]}.rpm"
+      package_file = "#{base_filename}-#{node['cs']['package']['version']['build']}.el#{node['platform_version'].to_i}.#{machines[node['kernel']['machine']]}.rpm"
     when "fedora"
       machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
       base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
-      package_file = "#{base_filename}-#{node['stanchion']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
+      package_file = "#{base_filename}-#{node['cs']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
     end
   when "source"
     package_file = "#{base_filename.sub(/\-/, '_')}.tar.gz"
