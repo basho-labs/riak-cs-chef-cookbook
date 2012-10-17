@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: stanchion
+# Cookbook Name:: riak_cs
 #
 # Copyright (c) 2012 Basho Technologies, Inc.
 #
