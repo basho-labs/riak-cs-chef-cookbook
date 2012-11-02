@@ -19,8 +19,12 @@
 
 #package
 default['stanchion']['package']['type'] = "binary"
-default['stanchion']['package']['source_checksum'] = '5e777291050771359da567f5dfe1c89afa602823aac9389160bbce58c946eb80'
+default['stanchion']['package']['secret_hash'] = "2fba8f"
 default['stanchion']['package']['config_dir'] = "/etc/stanchion"
+default['stanchion']['package']['version']['major'] = "1"
+default['stanchion']['package']['version']['minor'] = "1"
+default['stanchion']['package']['version']['incremental'] = "0"
+default['stanchion']['package']['version']['build'] = "1"
 
 #vm.args
 default['stanchion']['args']['-name'] = "stanchion@#{node['ipaddress']}"

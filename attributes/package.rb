@@ -20,8 +20,7 @@
 default['riak_cs']['package']['config_dir'] = "/etc/riak-cs"
 default['riak_cs']['package']['type'] = "binary"
 default['riak_cs']['package']['version']['major'] = "1"
-default['riak_cs']['package']['version']['minor'] = "1"
-default['riak_cs']['package']['version']['incremental'] = "0"
+default['riak_cs']['package']['version']['minor'] = "2"
+default['riak_cs']['package']['version']['incremental'] = "1"
 default['riak_cs']['package']['version']['build'] = "1"
-default['riak_cs']['package']['source_checksum'] = '70df2deff15936e4d42c610f641a0c26c46a7a8b1a4db058177e6bfba7d5c8cf'
-default['riak_cs']['package']['secret_hash'] = "2fba8f"
+default['riak_cs']['package']['secret_hash'] = "3kd8fa"

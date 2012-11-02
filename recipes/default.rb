@@ -41,8 +41,6 @@ case node['riak_cs']['package']['type']
       base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
       package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
     end
-  when "source"
-    package_file = "#{base_filename.sub(/\-/, '_')}.tar.gz"
   end
 
 package_uri = base_uri + package_file
