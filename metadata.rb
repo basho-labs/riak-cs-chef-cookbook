@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: cs
+# Cookbook Name:: riak_cs
 #
 # Copyright (c) 2012 Basho Technologies, Inc.
 #
@@ -22,8 +22,8 @@ maintainer        "Basho Technologies, Inc."
 maintainer_email  "riak@basho.com"
 license           "Apache 2.0"
 description       "Installs and configures riak cs"
-version           "1.1.0"
-recipe            "cs", "Installs Riak CS"
+version           "1.2.1"
+recipe            "riak_cs", "Installs Riak CS"
 
 %w{ubuntu debian rhel centos}.each do |os|
   supports os
