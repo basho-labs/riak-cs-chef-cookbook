@@ -1,6 +1,6 @@
 #
 # Author::Sean Carey (<densone@basho.com>)
-# Cookbook Name:: stanchion
+# Cookbook Name:: riak_cs
 #
 # Copyright (c) 2012 Basho Technologies, Inc.
 #
@@ -17,9 +17,8 @@
 # limitations under the License.
 #
 
-# riak-cs and stanchion are always released in step, hence using the cs version attributes
-version_str = "#{node['cs']['package']['version']['major']}.#{node['cs']['package']['version']['minor']}.#{node['cs']['package']['version']['incremental']}"
-base_uri = "http://private.downloads.basho.com/stanchion/#{node['cs']['package']['secret_hash']}/#{version_str}/"
+version_str = "#{node['stanchion']['package']['version']['major']}.#{node['stanchion']['package']['version']['minor']}.#{node['stanchion']['package']['version']['incremental']}"
+base_uri = "http://private.downloads.basho.com/stanchion/#{node['stanchion']['package']['secret_hash']}/#{version_str}/"
 base_filename = "stanchion-#{version_str}"
 
 case node['stanchion']['package']['type']
@@ -29,19 +28,19 @@ case node['stanchion']['package']['type']
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
       base_uri = "#{base_uri}#{node['platform']}/#{node['lsb']['codename']}/"
       package "libssl0.9.8"
-      package_file = "#{base_filename.gsub(/\-/, '_')}-#{node['cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"  
+      package_file = "#{base_filename.gsub(/\-/, '_')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"  
     when "debian"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
       base_uri = "#{base_uri}#{node['platform']}/squeeze/"
-      package_file = "#{base_filename.gsub(/\-/, '_')}-#{node['cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
+      package_file = "#{base_filename.gsub(/\-/, '_')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
     when "redhat","centos"
       machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
       base_uri = "#{base_uri}rhel/#{node['platform_version'].to_i}/"
-      package_file = "#{base_filename}-#{node['cs']['package']['version']['build']}.el#{node['platform_version'].to_i}.#{machines[node['kernel']['machine']]}.rpm"
+      package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.el#{node['platform_version'].to_i}.#{machines[node['kernel']['machine']]}.rpm"
     when "fedora"
       machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
       base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
-      package_file = "#{base_filename}-#{node['cs']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
+      package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
     end
   when "source"
     package_file = "#{base_filename.sub(/\-/, '_')}.tar.gz"

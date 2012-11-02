@@ -1,6 +1,6 @@
 #
 # Author::Seth Thomas (<sthomas@basho.com>)
-# Cookbook Name:: cs
+# Cookbook Name:: riak_cs
 #
 # Copyright (c) 2012 Basho Technologies, Inc.
 #
@@ -18,14 +18,14 @@
 #
 
 # vm.args
-default['cs']['args']['-name'] = "riak-cs@#{node['ipaddress']}"
-default['cs']['args']['-setcookie'] = "riak-cs"
-default['cs']['args']['+K'] = true
-default['cs']['args']['+A'] = 64
-default['cs']['args']['+W'] = "w"
-default['cs']['args']['-env']['ERL_MAX_PORTS'] = 4096
-default['cs']['args']['-env']['ERL_FULLSWEEP_AFTER'] = 0
-default['cs']['args']['-env']['ERL_CRASH_DUMP'] = "/var/log/riak-cs/erl_crash.dump"
+default['riak_cs']['args']['-name'] = "riak-cs@#{node['ipaddress']}"
+default['riak_cs']['args']['-setcookie'] = "riak-cs"
+default['riak_cs']['args']['+K'] = true
+default['riak_cs']['args']['+A'] = 64
+default['riak_cs']['args']['+W'] = "w"
+default['riak_cs']['args']['-env']['ERL_MAX_PORTS'] = 4096
+default['riak_cs']['args']['-env']['ERL_FULLSWEEP_AFTER'] = 0
+default['riak_cs']['args']['-env']['ERL_CRASH_DUMP'] = "/var/log/riak-cs/erl_crash.dump"
 
 # app.config
 class ::String
@@ -36,48 +36,48 @@ class ::Array
   include Eth::Erlang::Array
 end
 
-#riak_moss
-default['cs']['config']['riak_moss']['moss_ip'] = "#{node['ipaddress']}".to_erl_string
-default['cs']['config']['riak_moss']['moss_port'] = 8080
-default['cs']['config']['riak_moss']['put_fsm_buffer_size_max'] = 10485760
-default['cs']['config']['riak_moss']['riak_ip'] = "#{node['ipaddress']}".to_erl_string
-default['cs']['config']['riak_moss']['riak_pb_port'] = 8087
-default['cs']['config']['riak_moss']['auth_bypass'] = false
-default['cs']['config']['riak_moss']['moss_root_host'] = "s3.amazonaws.com".to_erl_string
-default['cs']['config']['riak_moss']['connection_pools']['request_pool'] = [128,0].to_erl_tuple
-default['cs']['config']['riak_moss']['connection_pools']['bucket_list_pool'] = [5,0].to_erl_tuple
-default['cs']['config']['riak_moss']['admin_key'] = "admin-key".to_erl_string
-default['cs']['config']['riak_moss']['admin_secret'] = "admin-secret".to_erl_string
-default['cs']['config']['riak_moss']['stanchion_ip'] = "#{node['ipaddress']}".to_erl_string
-default['cs']['config']['riak_moss']['stanchion_port'] = 8085
-default['cs']['config']['riak_moss']['stanchion_ssl'] = false
-default['cs']['config']['riak_moss']['access_log_flush_factor'] = 1
-default['cs']['config']['riak_moss']['access_log_flush_size'] = 1000000
-default['cs']['config']['riak_moss']['access_archive_period'] = 3600
-default['cs']['config']['riak_moss']['access_archiver_max_backlog'] = 2
-default['cs']['config']['riak_moss']['storage_schedule'] = [].to_erl_list
-default['cs']['config']['riak_moss']['storage_archive_period'] = 86400
-default['cs']['config']['riak_moss']['usage_request_limit'] = 744
-default['cs']['config']['riak_moss']['riak_cs_stat'] = true
-default['cs']['config']['riak_moss']['leeway_seconds'] = 86400
-default['cs']['config']['riak_moss']['gc_interval'] = 900
-default['cs']['config']['riak_moss']['gc_retry_interval'] = 21600
-default['cs']['config']['riak_moss']['dtrace_support'] = false
+#riak_cs
+default['riak_cs']['config']['riak_cs']['cs_ip'] = "#{node['ipaddress']}".to_erl_string
+default['riak_cs']['config']['riak_cs']['cs_port'] = 8080
+default['riak_cs']['config']['riak_cs']['put_fsm_buffer_size_max'] = 10485760
+default['riak_cs']['config']['riak_cs']['riak_ip'] = "#{node['ipaddress']}".to_erl_string
+default['riak_cs']['config']['riak_cs']['riak_pb_port'] = 8087
+default['riak_cs']['config']['riak_cs']['auth_bypass'] = false
+default['riak_cs']['config']['riak_cs']['cs_root_host'] = "s3.amazonaws.com".to_erl_string
+default['riak_cs']['config']['riak_cs']['connection_pools']['request_pool'] = [128,0].to_erl_tuple
+default['riak_cs']['config']['riak_cs']['connection_pools']['bucket_list_pool'] = [5,0].to_erl_tuple
+default['riak_cs']['config']['riak_cs']['admin_key'] = "admin-key".to_erl_string
+default['riak_cs']['config']['riak_cs']['admin_secret'] = "admin-secret".to_erl_string
+default['riak_cs']['config']['riak_cs']['stanchion_ip'] = "#{node['ipaddress']}".to_erl_string
+default['riak_cs']['config']['riak_cs']['stanchion_port'] = 8085
+default['riak_cs']['config']['riak_cs']['stanchion_ssl'] = false
+default['riak_cs']['config']['riak_cs']['access_log_flush_factor'] = 1
+default['riak_cs']['config']['riak_cs']['access_log_flush_size'] = 1000000
+default['riak_cs']['config']['riak_cs']['access_archive_period'] = 3600
+default['riak_cs']['config']['riak_cs']['access_archiver_max_backlog'] = 2
+default['riak_cs']['config']['riak_cs']['storage_schedule'] = [].to_erl_list
+default['riak_cs']['config']['riak_cs']['storage_archive_period'] = 86400
+default['riak_cs']['config']['riak_cs']['usage_request_limit'] = 744
+default['riak_cs']['config']['riak_cs']['riak_cs_stat'] = true
+default['riak_cs']['config']['riak_cs']['leeway_seconds'] = 86400
+default['riak_cs']['config']['riak_cs']['gc_interval'] = 900
+default['riak_cs']['config']['riak_cs']['gc_retry_interval'] = 21600
+default['riak_cs']['config']['riak_cs']['dtrace_support'] = false
 
 #webmachine
-default['cs']['config']['webmachine']['webmachine_logger_module'] = "riak_moss_access_logger"
+default['riak_cs']['config']['webmachine']['webmachine_logger_module'] = "riak_cs_access_logger"
 
 # lager
 error_log = ["/var/log/riak-cs/error.log".to_erl_string,"error",10485760,"$D0".to_erl_string,5].to_erl_tuple
 info_log = ["/var/log/riak-cs/console.log".to_erl_string,"info",10485760,"$D0".to_erl_string,5].to_erl_tuple
-default['cs']['config']['lager']['handlers']['lager_file_backend'] = [error_log, info_log]
-default['cs']['config']['lager']['crash_log'] = "/var/log/riak-cs/crash.log".to_erl_string
-default['cs']['config']['lager']['crash_log_msg_size'] = 65536
-default['cs']['config']['lager']['crash_log_size'] = 10485760
-default['cs']['config']['lager']['crash_log_date'] = "$D0".to_erl_string
-default['cs']['config']['lager']['crash_log_count'] = 5
-default['cs']['config']['lager']['error_logger_redirect'] = true
+default['riak_cs']['config']['lager']['handlers']['lager_file_backend'] = [error_log, info_log]
+default['riak_cs']['config']['lager']['crash_log'] = "/var/log/riak-cs/crash.log".to_erl_string
+default['riak_cs']['config']['lager']['crash_log_msg_size'] = 65536
+default['riak_cs']['config']['lager']['crash_log_size'] = 10485760
+default['riak_cs']['config']['lager']['crash_log_date'] = "$D0".to_erl_string
+default['riak_cs']['config']['lager']['crash_log_count'] = 5
+default['riak_cs']['config']['lager']['error_logger_redirect'] = true
 
 #sasl
-default['cs']['config']['sasl']['sasl_error_logger'] = false
-default['cs']['config']['sasl']['utc_log'] = true
+default['riak_cs']['config']['sasl']['sasl_error_logger'] = false
+default['riak_cs']['config']['sasl']['utc_log'] = true
