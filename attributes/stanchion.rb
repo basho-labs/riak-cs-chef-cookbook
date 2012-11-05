@@ -45,9 +45,9 @@ class ::Array
 end
 
 #stanchion
-default['stanchion']['config']['stanchion']['stanchion_ip'] = "#{node['ipaddress']}".to_erl_string
+default['stanchion']['config']['stanchion']['stanchion_ip'] = node['ipaddress'].to_erl_string
 default['stanchion']['config']['stanchion']['stanchion_port'] = 8085
-default['stanchion']['config']['stanchion']['riak_ip'] = "#{node['ipaddress']}".to_erl_string
+default['stanchion']['config']['stanchion']['riak_ip'] = node['ipaddress'].to_erl_string
 default['stanchion']['config']['stanchion']['riak_pb_port'] = 8087
 default['stanchion']['config']['stanchion']['auth_bypass'] = false
 default['stanchion']['config']['stanchion']['admin_key'] = "admin-key".to_erl_string
