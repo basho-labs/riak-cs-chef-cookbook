@@ -37,10 +37,10 @@ class ::Array
 end
 
 #riak_cs
-default['riak_cs']['config']['riak_cs']['cs_ip'] = "#{node['ipaddress']}".to_erl_string
+default['riak_cs']['config']['riak_cs']['cs_ip'] = node['ipaddress'].to_erl_string
 default['riak_cs']['config']['riak_cs']['cs_port'] = 8080
 default['riak_cs']['config']['riak_cs']['put_fsm_buffer_size_max'] = 10485760
-default['riak_cs']['config']['riak_cs']['riak_ip'] = "#{node['ipaddress']}".to_erl_string
+default['riak_cs']['config']['riak_cs']['riak_ip'] = node['ipaddress'].to_erl_string
 default['riak_cs']['config']['riak_cs']['riak_pb_port'] = 8087
 default['riak_cs']['config']['riak_cs']['auth_bypass'] = false
 default['riak_cs']['config']['riak_cs']['cs_root_host'] = "s3.amazonaws.com".to_erl_string
@@ -48,7 +48,7 @@ default['riak_cs']['config']['riak_cs']['connection_pools']['request_pool'] = [1
 default['riak_cs']['config']['riak_cs']['connection_pools']['bucket_list_pool'] = [5,0].to_erl_tuple
 default['riak_cs']['config']['riak_cs']['admin_key'] = "admin-key".to_erl_string
 default['riak_cs']['config']['riak_cs']['admin_secret'] = "admin-secret".to_erl_string
-default['riak_cs']['config']['riak_cs']['stanchion_ip'] = "#{node['ipaddress']}".to_erl_string
+default['riak_cs']['config']['riak_cs']['stanchion_ip'] = node['ipaddress'].to_erl_string
 default['riak_cs']['config']['riak_cs']['stanchion_port'] = 8085
 default['riak_cs']['config']['riak_cs']['stanchion_ssl'] = false
 default['riak_cs']['config']['riak_cs']['access_log_flush_factor'] = 1
