@@ -60,7 +60,6 @@ remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
   source package_uri
   owner "root"
   mode 0644
-  checksum node['riak_cs']['package']['source_checksum']
   not_if { File.exists?("#{Chef::Config[:file_cache_path]}#{package_file}") }
 end
 
