@@ -81,3 +81,7 @@ default['riak_cs']['config']['lager']['error_logger_redirect'] = true
 #sasl
 default['riak_cs']['config']['sasl']['sasl_error_logger'] = false
 default['riak_cs']['config']['sasl']['utc_log'] = true
+
+# limits
+default['riak_cs']['limits']['maxfiles']['soft'] = 4096
+default['riak_cs']['limits']['maxfiles']['hard'] = 4096
