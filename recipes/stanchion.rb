@@ -98,6 +98,14 @@ file "#{node['stanchion']['package']['config_dir']}/vm.args" do
   mode 0644
 end
 
+# Attempted to place an only_if condition on this resource, but Chef
+# would not honor it ...
+if node['stanchion']['limits']['config_limits']
+  file_ulimit "stanchion" do
+    soft_limit node['stanchion']['limits']['maxfiles']['soft']
+    hard_limit node['stanchion']['limits']['maxfiles']['hard']
+  end
+end
 service "stanchion" do
   supports :start => true, :stop => true, :restart => true
   action [ :enable, :start ]

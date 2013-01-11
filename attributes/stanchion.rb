@@ -68,3 +68,7 @@ default['stanchion']['config']['lager']['error_logger_redirect'] = true
 default['stanchion']['config']['sasl']['sasl_error_logger'] = false
 default['stanchion']['config']['sasl']['utc_log'] = true
 
+# limits
+default['stanchion']['limits']['maxfiles']['soft'] = 4096
+default['stanchion']['limits']['maxfiles']['hard'] = 4096
+default['stanchion']['limits']['config_limits'] = false

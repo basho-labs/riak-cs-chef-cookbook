@@ -93,24 +93,19 @@ file "#{node['riak_cs']['package']['config_dir']}/vm.args" do
   mode 0644
 end
 
-# Ubuntu/Debian and RHEL/Fedora/CentOS use the same directory for limits configuration files ...
-limits_file = "/etc/security/limits.d/95-riak-cs.conf"
-
-template limits_file do
-  source "riak-cs-limits.erb"
-  mode 0644
-  owner "root"
-  group "root"
-  variables({
-    :soft_file_limit => node[:riak_cs][:limits][:maxfiles][:soft],
-    :hard_file_limit => node[:riak_cs][:limits][:maxfiles][:hard]
-  })
+# Attempted to place an only_if condition on this resource, but Chef
+# would not honor it ...
+if node['riak_cs']['limits']['config_limits']
+  file_ulimit "riak-cs" do
+    user "riakcs"
+    soft_limit node['riak_cs']['limits']['maxfiles']['soft']
+    hard_limit node['riak_cs']['limits']['maxfiles']['hard']
+  end
 end
 
 service "riak-cs" do
   supports :start => true, :stop => true, :restart => true
   action [:enable, :start]
   subscribes :restart, resources(:file => [ "#{node['riak_cs']['package']['config_dir']}/app.config",
-                                   "#{node['riak_cs']['package']['config_dir']}/vm.args"],
-                                 :template => [ limits_file ])
+                                   "#{node['riak_cs']['package']['config_dir']}/vm.args"])
 end

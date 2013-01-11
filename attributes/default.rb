@@ -85,3 +85,4 @@ default['riak_cs']['config']['sasl']['utc_log'] = true
 # limits
 default['riak_cs']['limits']['maxfiles']['soft'] = 4096
 default['riak_cs']['limits']['maxfiles']['hard'] = 4096
+default['riak_cs']['limits']['config_limits'] = false
