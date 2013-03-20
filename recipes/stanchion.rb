@@ -90,12 +90,14 @@ file "#{node['stanchion']['package']['config_dir']}/app.config" do
   content Eth::Config.new(node['stanchion']['config'].to_hash).pp
   owner "root"
   mode 0644
+  notifies :restart, "service[stanchion]"
 end
 
 file "#{node['stanchion']['package']['config_dir']}/vm.args" do
   content Eth::Args.new(node['stanchion']['args'].to_hash).pp
   owner "root"
   mode 0644
+  notifies :restart, "service[stanchion]"
 end
 
 # Attempted to place an only_if condition on this resource, but Chef
@@ -109,6 +111,4 @@ end
 service "stanchion" do
   supports :start => true, :stop => true, :restart => true
   action [ :enable, :start ]
-  subscribes :restart, resources(:file => [ "#{node['stanchion']['package']['config_dir']}/app.config",
-                                   "#{node['stanchion']['package']['config_dir']}/vm.args" ])
 end

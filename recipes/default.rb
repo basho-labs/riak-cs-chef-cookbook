@@ -85,12 +85,14 @@ file "#{node['riak_cs']['package']['config_dir']}/app.config" do
   content Eth::Config.new(node['riak_cs']['config'].to_hash).pp
   owner "root"
   mode 0644
+  notifies :restart, "service[riak-cs]"
 end
 
 file "#{node['riak_cs']['package']['config_dir']}/vm.args" do
   content Eth::Args.new(node['riak_cs']['args'].to_hash).pp
   owner "root"
   mode 0644
+  notifies :restart, "service[riak-cs]"
 end
 
 # Attempted to place an only_if condition on this resource, but Chef
@@ -106,6 +108,4 @@ end
 service "riak-cs" do
   supports :start => true, :stop => true, :restart => true
   action [:enable, :start]
-  subscribes :restart, resources(:file => [ "#{node['riak_cs']['package']['config_dir']}/app.config",
-                                   "#{node['riak_cs']['package']['config_dir']}/vm.args"])
 end
