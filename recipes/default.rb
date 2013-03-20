@@ -20,19 +20,19 @@
 version_str = "#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}.#{node['riak_cs']['package']['version']['incremental']}"
 base_uri = "http://s3.amazonaws.com/downloads.basho.com/riak-cs/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
 base_filename = "riak-cs-#{version_str}"
-  
+
 case node['riak_cs']['package']['type']
   when "binary"
     case node['platform']
     when "ubuntu"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
       base_uri = "#{base_uri}#{node['platform']}/#{node['lsb']['codename']}/"
-      package_file = "#{base_filename.gsub(/\-/, '_').sub(/_/,'-')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"  
+      package_file = "#{base_filename.gsub(/\-/, '_').sub(/_/,'-')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
     when "debian"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
       base_uri = "#{base_uri}#{node['platform']}/squeeze/"
       package_file = "#{base_filename.gsub(/\-/, '_').sub(/_/,'-')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
-    when "redhat","centos"
+    when "redhat", "centos", "scientific", "amazon"
       machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
       base_uri = "#{base_uri}rhel/#{node['platform_version'].to_i}/"
       package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.el#{node['platform_version'].to_i}.#{machines[node['kernel']['machine']]}.rpm"
@@ -76,7 +76,7 @@ package package_name do
     [ "redhat", "centos", "fedora", "suse" ] => {"default" => Chef::Provider::Package::Rpm}
   )
   case node['platform'] when "ubuntu","debian"
-    options "--force-confdef --force-confold" 
+    options "--force-confdef --force-confold"
   end
   action :install
 end
