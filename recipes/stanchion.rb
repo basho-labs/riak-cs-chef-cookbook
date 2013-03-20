@@ -18,7 +18,7 @@
 #
 
 version_str = "#{node['stanchion']['package']['version']['major']}.#{node['stanchion']['package']['version']['minor']}.#{node['stanchion']['package']['version']['incremental']}"
-base_uri = "http://private.downloads.basho.com/stanchion/#{node['stanchion']['package']['secret_hash']}/#{version_str}/"
+base_uri = base_uri = "http://s3.amazonaws.com/downloads.basho.com/stanchion/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
 base_filename = "stanchion-#{version_str}"
 
 case node['stanchion']['package']['type']

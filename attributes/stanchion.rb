@@ -22,8 +22,8 @@ default['stanchion']['package']['type'] = "binary"
 default['stanchion']['package']['secret_hash'] = "3kd8fa"
 default['stanchion']['package']['config_dir'] = "/etc/stanchion"
 default['stanchion']['package']['version']['major'] = "1"
-default['stanchion']['package']['version']['minor'] = "2"
-default['stanchion']['package']['version']['incremental'] = "2"
+default['stanchion']['package']['version']['minor'] = "3"
+default['stanchion']['package']['version']['incremental'] = "0"
 default['stanchion']['package']['version']['build'] = "1"
 
 #vm.args

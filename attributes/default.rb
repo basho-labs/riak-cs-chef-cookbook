@@ -39,7 +39,6 @@ end
 #riak_cs
 default['riak_cs']['config']['riak_cs']['cs_ip'] = node['ipaddress'].to_erl_string
 default['riak_cs']['config']['riak_cs']['cs_port'] = 8080
-default['riak_cs']['config']['riak_cs']['put_fsm_buffer_size_max'] = 10485760
 default['riak_cs']['config']['riak_cs']['riak_ip'] = node['ipaddress'].to_erl_string
 default['riak_cs']['config']['riak_cs']['riak_pb_port'] = 8087
 default['riak_cs']['config']['riak_cs']['auth_bypass'] = false
@@ -65,7 +64,10 @@ default['riak_cs']['config']['riak_cs']['gc_retry_interval'] = 21600
 default['riak_cs']['config']['riak_cs']['dtrace_support'] = false
 
 #webmachine
-default['riak_cs']['config']['webmachine']['webmachine_logger_module'] = "riak_cs_access_logger"
+default['riak_cs']['config']['webmachine']['server_name'] = "Riak CS"
+default['riak_cs']['config']['webmachine']['log_handlers']['webmachine_log_handler'] = ["/var/log/riak-cs"].to_erl_list
+default['riak_cs']['config']['webmachine']['log_handlers']['riak_cs_access_log_handler'] = [].to_erl_list
+
 
 # lager
 error_log = ["/var/log/riak-cs/error.log".to_erl_string,"error",10485760,"$D0".to_erl_string,5].to_erl_tuple

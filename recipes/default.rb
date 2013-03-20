@@ -18,7 +18,7 @@
 #
 
 version_str = "#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}.#{node['riak_cs']['package']['version']['incremental']}"
-base_uri = "http://private.downloads.basho.com/riak-cs/#{node['riak_cs']['package']['secret_hash']}/#{version_str}/"
+base_uri = "http://s3.amazonaws.com/downloads.basho.com/riak-cs/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
 base_filename = "riak-cs-#{version_str}"
   
 case node['riak_cs']['package']['type']
