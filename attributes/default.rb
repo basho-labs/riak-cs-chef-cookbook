@@ -65,7 +65,7 @@ default['riak_cs']['config']['riak_cs']['dtrace_support'] = false
 
 #webmachine
 default['riak_cs']['config']['webmachine']['server_name'] = "Riak CS".to_erl_string
-default['riak_cs']['config']['webmachine']['log_handlers']['webmachine_log_handler'] = ["/var/log/riak-cs"].to_erl_list
+default['riak_cs']['config']['webmachine']['log_handlers']['webmachine_log_handler'] = ["/var/log/riak-cs".to_erl_string].to_erl_list
 default['riak_cs']['config']['webmachine']['log_handlers']['riak_cs_access_log_handler'] = [].to_erl_list
 
 
