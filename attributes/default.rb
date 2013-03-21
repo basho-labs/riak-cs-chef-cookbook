@@ -1,6 +1,6 @@
 #
-# Author::Seth Thomas (<sthomas@basho.com>)
-# Cookbook Name:: riak_cs
+# Author::Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>)
+# Cookbook Name:: riak-cs
 #
 # Copyright (c) 2012 Basho Technologies, Inc.
 #
