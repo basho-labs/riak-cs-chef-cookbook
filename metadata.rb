@@ -21,9 +21,11 @@ name              "riak-cs"
 maintainer        "Basho Technologies, Inc."
 maintainer_email  "riak@basho.com"
 license           "Apache 2.0"
-description       "Installs and configures riak cs"
+description       "Installs and configures Riak CS"
 version           "1.3.0"
 recipe            "riak-cs", "Installs Riak CS"
+recipe            "stanchion", "Installs Stanchion"
+recipe            "control", "Installs Riak CS Control"
 
 %w{ubuntu debian redhat centos scientific oracle amazon}.each do |os|
   supports os

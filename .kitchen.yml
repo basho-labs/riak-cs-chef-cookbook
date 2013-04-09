@@ -38,3 +38,7 @@ suites:
   run_list:
   - recipe[riak-cs::stanchion]
   attributes: {}
+- name: control
+  run_list:
+  - recipe[riak-cs::control]
+  attributes: {}
