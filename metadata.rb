@@ -22,7 +22,7 @@ maintainer        "Basho Technologies, Inc."
 maintainer_email  "riak@basho.com"
 license           "Apache 2.0"
 description       "Installs and configures riak cs"
-version           "1.3.0"
+version           "1.3.1"
 recipe            "riak-cs", "Installs Riak CS"
 
 %w{ubuntu debian redhat centos scientific oracle amazon}.each do |os|
