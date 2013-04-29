@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe "ulimit" unless node['platform_family'] == "debian"
 
 version_str = "#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}.#{node['riak_cs']['package']['version']['incremental']}"
 base_uri = "http://s3.amazonaws.com/downloads.basho.com/riak-cs/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
@@ -85,13 +86,17 @@ file "#{node['riak_cs']['package']['config_dir']}/vm.args" do
   notifies :restart, "service[riak-cs]"
 end
 
-# Attempted to place an only_if condition on this resource, but Chef
-# would not honor it ...
-if node['riak_cs']['limits']['config_limits']
-  file_ulimit "riak-cs" do
-    user "riakcs"
-    soft_limit node['riak_cs']['limits']['maxfiles']['soft']
-    hard_limit node['riak_cs']['limits']['maxfiles']['hard']
+if node['platform_family'] == "debian"
+  file "/etc/default/riak-cs" do
+    content "ulimit -n #{node['riak_cs']['limits']['nofile']}"
+    owner "root"
+    mode 0644
+    action :create_if_missing
+    notifies :restart, "service[riak-cs]"
+  end
+else
+  user_ulimit "riakcs" do
+    filehandle_limit node['riak_cs']['limits']['nofile']
   end
 end
 

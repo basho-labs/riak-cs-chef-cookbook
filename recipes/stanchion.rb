@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe "ulimit" unless node['platform_family'] == "debian"
 
 version_str = "#{node['stanchion']['package']['version']['major']}.#{node['stanchion']['package']['version']['minor']}.#{node['stanchion']['package']['version']['incremental']}"
 base_uri = base_uri = "http://s3.amazonaws.com/downloads.basho.com/stanchion/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
@@ -90,14 +91,20 @@ file "#{node['stanchion']['package']['config_dir']}/vm.args" do
   notifies :restart, "service[stanchion]"
 end
 
-# Attempted to place an only_if condition on this resource, but Chef
-# would not honor it ...
-if node['stanchion']['limits']['config_limits']
-  file_ulimit "stanchion" do
-    soft_limit node['stanchion']['limits']['maxfiles']['soft']
-    hard_limit node['stanchion']['limits']['maxfiles']['hard']
+if node['platform_family'] == "debian"
+  file "/etc/default/stanchion" do
+    content "ulimit -n #{node['stanchion']['limits']['nofile']}"
+    owner "root"
+    mode 0644
+    action :create_if_missing
+    notifies :restart, "service[stanchion]"
+  end
+else
+  user_ulimit "stanchion" do
+    filehandle_limit node['stanchion']['limits']['nofile']
   end
 end
+
 service "stanchion" do
   supports :start => true, :stop => true, :restart => true
   action [ :enable, :start ]

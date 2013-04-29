@@ -85,16 +85,6 @@ file "#{node['riak_cs_control']['package']['config_dir']}/vm.args" do
   notifies :restart, "service[riak-cs-control]"
 end
 
-# Attempted to place an only_if condition on this resource, but Chef
-# would not honor it ...
-if node['riak_cs_control']['limits']['config_limits']
-  file_ulimit "riak-cs-control" do
-    user "riakcs"
-    soft_limit node['riak_cs_control']['limits']['maxfiles']['soft']
-    hard_limit node['riak_cs_control']['limits']['maxfiles']['hard']
-  end
-end
-
 service "riak-cs-control" do
   supports :start => true, :stop => true, :restart => true
   action [:enable, :start]
