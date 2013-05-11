@@ -5,7 +5,6 @@ metadata
 group :integration do
   cookbook "apt"
   cookbook "yum"
+  cookbook "minitest-handler"
 
-  # Future, when/if minitest support for this cookbook is added
-  #cookbook "minitest-handler"
 end
