@@ -19,13 +19,26 @@ suites:
 - name: default
   run_list:
   - recipe[minitest-handler]
+  - recipe[riak]
   - recipe[riak-cs]
-  attributes: {}
-- name: stanchion
-  run_list:
   - recipe[riak-cs::stanchion]
-  attributes: {}
-- name: control
-  run_list:
   - recipe[riak-cs::control]
-  attributes: {}
+  - recipe[riak-cs-create-admin-user]
+  attributes:
+    riak:
+      args:
+        +S: 1
+      config:
+        riak_core:
+          default_bucket_props: [["__tuple", "allow_mult", true]]
+        riak_kv:
+          storage_backend: riak_cs_kv_multi_backend
+    riak-cs:
+      args:
+        +S: 1
+    stanchion:
+      args:
+        +S: 1
+    riak-cs-control:
+      args:
+        +S: 1
