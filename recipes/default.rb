@@ -44,17 +44,7 @@ case node['riak_cs']['package']['type']
   end
 
 package_uri = base_uri + package_file
-
 package_name = package_file.split("[-_]\d+\.").first
-
-group "riak"
-
-user "riakcs" do
-  gid "riak"
-  shell "/bin/bash"
-  home "/var/lib/riak-cs"
-  system true
-end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
   source package_uri
