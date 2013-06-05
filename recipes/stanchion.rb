@@ -45,17 +45,7 @@ case node['stanchion']['package']['type']
 end
 
 package_uri = base_uri + package_file
-
 package_name = package_file.split("[-_]\d+\.").first
-
-group "stanchion"
-
-user "stanchion" do
-  gid "stanchion"
-  shell "/bin/bash"
-  home "/var/lib/stanchion"
-  system true
-end
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
   source package_uri
