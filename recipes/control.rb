@@ -16,6 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe "ulimit"
 
 version_str = "#{node['riak_cs_control']['package']['version']['major']}.#{node['riak_cs_control']['package']['version']['minor']}.#{node['riak_cs_control']['package']['version']['incremental']}"
 base_uri = "http://s3.amazonaws.com/downloads.basho.com/riak-cs-control/#{node['riak_cs_control']['package']['version']['major']}.#{node['riak_cs_control']['package']['version']['minor']}/#{version_str}/"
@@ -85,14 +86,8 @@ file "#{node['riak_cs_control']['package']['config_dir']}/vm.args" do
   notifies :restart, "service[riak-cs-control]"
 end
 
-# Attempted to place an only_if condition on this resource, but Chef
-# would not honor it ...
-if node['riak_cs_control']['limits']['config_limits']
-  file_ulimit "riak-cs-control" do
-    user "riakcs"
-    soft_limit node['riak_cs_control']['limits']['maxfiles']['soft']
-    hard_limit node['riak_cs_control']['limits']['maxfiles']['hard']
-  end
+user_ulimit "riakcs" do
+  filehandle_limit node['riak_cs']['limits']['nofile']
 end
 
 service "riak-cs-control" do
