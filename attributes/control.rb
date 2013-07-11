@@ -18,12 +18,13 @@
 #
 
 #package
-default['riak_cs_control']['package']['config_dir'] = "/etc/riak-cs-control"
+default['riak_cs_control']['package']['url'] = "http://s3.amazonaws.com/downloads.basho.com/riak-cs-control"
 default['riak_cs_control']['package']['type'] = "binary"
 default['riak_cs_control']['package']['version']['major'] = "1"
 default['riak_cs_control']['package']['version']['minor'] = "0"
 default['riak_cs_control']['package']['version']['incremental'] = "0"
 default['riak_cs_control']['package']['version']['build'] = "1"
+default['riak_cs_control']['package']['config_dir'] = "/etc/riak-cs-control"
 
 #vm.args
 default['riak_cs_control']['args']['-name'] = "riak-cs-control@#{node['ipaddress']}"
