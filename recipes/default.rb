@@ -1,5 +1,6 @@
 #
-# Author:: Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>)
+# Author:: Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>),
+#          Hector Castro (<hector@basho.com>)
 # Cookbook Name:: riak-cs
 #
 # Copyright (c) 2013 Basho Technologies, Inc.
@@ -16,59 +17,63 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+include_recipe "ulimit" unless node['platform_family'] == "debian"
 
 version_str = "#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}.#{node['riak_cs']['package']['version']['incremental']}"
-base_uri = "http://s3.amazonaws.com/downloads.basho.com/riak-cs/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
+base_uri = "#{node['riak_cs']['package']['url']}/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
 base_filename = "riak-cs-#{version_str}"
 
-case node['riak_cs']['package']['type']
-  when "binary"
-    case node['platform']
-    when "ubuntu"
-      machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
-      base_uri = "#{base_uri}#{node['platform']}/#{node['lsb']['codename']}/"
-      package_file = "#{base_filename.gsub(/\-/, '_').sub(/_/,'-')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
-    when "debian"
-      machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
-      base_uri = "#{base_uri}#{node['platform']}/squeeze/"
-      package_file = "#{base_filename.gsub(/\-/, '_').sub(/_/,'-')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
-    when "redhat", "centos", "scientific", "amazon"
-      machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
-      base_uri = "#{base_uri}rhel/#{node['platform_version'].to_i}/"
-      package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.el#{node['platform_version'].to_i}.#{machines[node['kernel']['machine']]}.rpm"
-    when "fedora"
-      machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
-      base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
-      package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
-    end
+case node['platform_family']
+when "debian"
+  include_recipe "apt"
+
+  apt_repository "basho" do
+    uri "http://apt.basho.com"
+    distribution node['lsb']['codename']
+    components ["main"]
+    key "http://apt.basho.com/gpg/basho.apt.key"
   end
 
-package_uri = base_uri + package_file
-package_name = package_file.split("[-_]\d+\.").first
-
-remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
-  source package_uri
-  owner "root"
-  mode 0644
-  not_if { File.exists?("#{Chef::Config[:file_cache_path]}#{package_file}") }
-end
-
-directory node['riak_cs']['package']['config_dir'] do
-  owner "root"
-  mode "0755"
-  action :create
-end
-
-package package_name do
-  source "#{Chef::Config[:file_cache_path]}/#{package_file}"
-  provider value_for_platform(
-    [ "ubuntu", "debian" ] => {"default" => Chef::Provider::Package::Dpkg},
-    [ "redhat", "centos", "fedora", "suse" ] => {"default" => Chef::Provider::Package::Rpm}
-  )
-  case node['platform'] when "ubuntu","debian"
-    options "--force-confdef --force-confold"
+  package "riak-cs" do
+    action :install
   end
-  action :install
+when "rhel"
+  include_recipe "yum"
+
+  yum_key "RPM-GPG-KEY-basho" do
+    url "http://yum.basho.com/gpg/RPM-GPG-KEY-basho"
+    action :add
+  end
+
+  yum_repository "basho" do
+    repo_name "basho"
+    description "Basho Stable Repo"
+    url "http://yum.basho.com/el/#{node['platform_version'].to_i}/products/x86_64/"
+    key "RPM-GPG-KEY-basho"
+    action :add
+  end
+
+  package "riak-cs" do
+    action :install
+  end
+when "fedora"
+  machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
+  base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
+  package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
+  package_uri = base_uri + package_file
+  package_name = package_file.split("[-_]\d+\.").first
+
+  remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
+    source package_uri
+    owner "root"
+    mode 0644
+    not_if { File.exists?("#{Chef::Config[:file_cache_path]}/#{package_file}") }
+  end
+
+  package package_name do
+    source "#{Chef::Config[:file_cache_path]}/#{package_file}"
+    action :install
+  end
 end
 
 file "#{node['riak_cs']['package']['config_dir']}/app.config" do
@@ -85,17 +90,21 @@ file "#{node['riak_cs']['package']['config_dir']}/vm.args" do
   notifies :restart, "service[riak-cs]"
 end
 
-# Attempted to place an only_if condition on this resource, but Chef
-# would not honor it ...
-if node['riak_cs']['limits']['config_limits']
-  file_ulimit "riak-cs" do
-    user "riakcs"
-    soft_limit node['riak_cs']['limits']['maxfiles']['soft']
-    hard_limit node['riak_cs']['limits']['maxfiles']['hard']
+if node['platform_family'] == "debian"
+  file "/etc/default/riak-cs" do
+    content "ulimit -n #{node['riak_cs']['limits']['nofile']}"
+    owner "root"
+    mode 0644
+    action :create_if_missing
+    notifies :restart, "service[riak-cs]"
+  end
+else
+  user_ulimit "riakcs" do
+    filehandle_limit node['riak_cs']['limits']['nofile']
   end
 end
 
 service "riak-cs" do
   supports :start => true, :stop => true, :restart => true
-  action [:enable, :start]
+  action [ :enable, :start ]
 end

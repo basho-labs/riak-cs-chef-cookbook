@@ -4,7 +4,7 @@ metadata
 
 group :integration do
   cookbook "apt"
-  cookbook "yum"
+  cookbook "yum", ">= 2.2.4"
   cookbook "minitest-handler"
 
   cookbook "riak", github: "basho/riak-chef-cookbook", ref: "2.0.0"
