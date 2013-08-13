@@ -1,3 +1,8 @@
+## v2.2.0:
+
+* Riak CS `1.4.0` is now the default.
+* Add support for Riak CS Enterprise.
+
 ## v2.1.0:
 
 * Standardize file descriptor limit setting procedures so that they line up
