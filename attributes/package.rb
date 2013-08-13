@@ -17,6 +17,8 @@
 # limitations under the License.
 #
 
+default['riak_cs']['package']['enterprise_key'] = ""
+
 default['riak_cs']['package']['url'] = "http://s3.amazonaws.com/downloads.basho.com/riak-cs"
 default['riak_cs']['package']['type'] = "binary"
 default['riak_cs']['package']['version']['major'] = "1"
