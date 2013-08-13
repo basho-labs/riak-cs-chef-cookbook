@@ -23,13 +23,42 @@ suites:
 - name: default
   run_list:
   - recipe[minitest-handler]
+  - recipe[riak-cs::package]
   - recipe[riak]
   - recipe[riak-cs]
   - recipe[riak-cs::stanchion]
-  - recipe[riak-cs::control]
   - recipe[riak-cs-create-admin-user]
   attributes:
     riak:
+      cs_version: "1.3.1"
+      package:
+        version:
+          minor: 3
+          incremental: 2
+      config:
+        riak_core:
+          default_bucket_props: [["__tuple", "allow_mult", true]]
+        riak_kv:
+          storage_backend: riak_cs_kv_multi_backend
+- name: enterprise
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[riak-cs::enterprise_package]
+  - recipe[riak]
+  - recipe[riak-cs]
+  - recipe[riak-cs::stanchion]
+  - recipe[riak-cs-create-admin-user]
+  attributes:
+    riak_cs:
+      package:
+        enterprise_key: <%= (ENV["RIAK_CS_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_CS_ENTERPRISE_KEY"]) %>
+    riak:
+      cs_version: "1.3.1"
+      package:
+        version:
+          minor: 3
+          incremental: 2
+        enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
       config:
         riak_core:
           default_bucket_props: [["__tuple", "allow_mult", true]]
