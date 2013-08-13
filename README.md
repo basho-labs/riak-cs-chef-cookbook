@@ -10,7 +10,7 @@ To install Riak Enterprise populate the following attribute with a Basho
 provided key:
 
 ```ruby
-node['riak_cd']['package']['enterprise_key']
+node['riak_cs']['package']['enterprise_key']
 ```
 
 ## License and Author
