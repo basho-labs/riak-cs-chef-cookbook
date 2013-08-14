@@ -1,3 +1,7 @@
+## v2.2.2:
+
+* Remove `allow_mult` overrides in Test Kitchen suite.
+
 ## v2.2.1:
 
 * Add support for installing older versions of Riak CS.
