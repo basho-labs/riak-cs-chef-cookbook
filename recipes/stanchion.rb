@@ -22,6 +22,8 @@ include_recipe "ulimit" unless node['platform_family'] == "debian"
 version_str = "#{node['stanchion']['package']['version']['major']}.#{node['stanchion']['package']['version']['minor']}.#{node['stanchion']['package']['version']['incremental']}"
 base_uri = base_uri = "#{node['stanchion']['package']['url']}/#{node['stanchion']['package']['version']['major']}.#{node['stanchion']['package']['version']['minor']}/#{version_str}/"
 base_filename = "stanchion-#{version_str}"
+platform_version = node['platform_version'].to_i
+package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build']}"
 
 case node['platform_family']
 when "debian"
@@ -36,6 +38,7 @@ when "debian"
 
   package "stanchion" do
     action :install
+    version package_version
   end
 when "rhel"
   include_recipe "yum"
@@ -53,13 +56,18 @@ when "rhel"
     action :add
   end
 
+  if platform_version >= 6
+    package_version = "#{package_version}.el#{platform_version}"
+  end
+
   package "stanchion" do
     action :install
+    version package_version
   end
 when "fedora"
   machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
-  base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
-  package_file = "#{base_filename}-#{node['stanchion']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
+  base_uri = "#{base_uri}#{node['platform']}/#{platform_version}/"
+  package_file = "#{base_filename}-#{node['stanchion']['package']['version']['build']}.fc#{platform_version}.#{node['kernel']['machine']}.rpm"
   package_uri = base_uri + package_file
   package_name = package_file.split("[-_]\d+\.").first
 
