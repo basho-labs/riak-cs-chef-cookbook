@@ -22,7 +22,7 @@ version_str = "#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs
 base_uri = "#{node['riak_cs']['package']['url']}/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
 base_filename = "riak-cs-#{version_str}"
 
-package_version = "#{version_str}.#{node['riak_cs']['package']['version']['incremental']}-#{node['riak_cs']['package']['version']['build']}"
+package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build']}"
 
 case node['platform_family']
 when "debian"
