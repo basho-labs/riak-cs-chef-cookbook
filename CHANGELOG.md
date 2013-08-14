@@ -1,3 +1,7 @@
+## v2.2.1:
+
+* Add support for installing older versions of Riak CS.
+
 ## v2.2.0:
 
 * Riak CS `1.4.0` is now the default.
