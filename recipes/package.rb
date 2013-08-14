@@ -22,6 +22,8 @@ version_str = "#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs
 base_uri = "#{node['riak_cs']['package']['url']}/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
 base_filename = "riak-cs-#{version_str}"
 
+package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build']}"
+
 case node['platform_family']
 when "debian"
   include_recipe "apt"
@@ -35,6 +37,7 @@ when "debian"
 
   package "riak-cs" do
     action :install
+    version package_version
   end
 when "rhel"
   include_recipe "yum"
@@ -54,6 +57,7 @@ when "rhel"
 
   package "riak-cs" do
     action :install
+    version package_version
   end
 when "fedora"
   machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
