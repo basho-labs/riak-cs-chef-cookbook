@@ -20,6 +20,8 @@
 version_str = "#{node['riak_cs_control']['package']['version']['major']}.#{node['riak_cs_control']['package']['version']['minor']}.#{node['riak_cs_control']['package']['version']['incremental']}"
 base_uri = "#{node['riak_cs_control']['package']['url']}/#{node['riak_cs_control']['package']['version']['major']}.#{node['riak_cs_control']['package']['version']['minor']}/#{version_str}/"
 base_filename = "riak-cs-control-#{version_str}"
+platform_version = node['platform_version'].to_i
+package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build']}"
 
 case node['platform_family']
 when "debian"
@@ -34,6 +36,7 @@ when "debian"
 
   package "riak-cs-control" do
     action :install
+    version package_version
   end
 when "rhel"
   include_recipe "yum"
@@ -46,18 +49,23 @@ when "rhel"
   yum_repository "basho" do
     repo_name "basho"
     description "Basho Stable Repo"
-    url "http://yum.basho.com/el/#{node['platform_version'].to_i}/products/x86_64/"
+    url "http://yum.basho.com/el/#{platform_version}/products/x86_64/"
     key "RPM-GPG-KEY-basho"
     action :add
   end
 
+  if platform_version >= 6
+    package_version = "#{package_version}.el#{platform_version}"
+  end
+
   package "riak-cs-control" do
     action :install
+    version package_version
   end
 when "fedora"
   machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
-  base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
-  package_file = "#{base_filename}-#{node['riak_cs_control']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
+  base_uri = "#{base_uri}#{node['platform']}/#{platform_version}/"
+  package_file = "#{base_filename}-#{node['riak_cs_control']['package']['version']['build']}.fc#{platform_version}.#{node['kernel']['machine']}.rpm"
   package_uri = base_uri + package_file
   package_name = package_file.split("[-_]\d+\.").first
 
