@@ -5,7 +5,6 @@ platforms:
   driver_config:
     box: opscode-ubuntu-12.04
     box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-12.04_provisionerless.box
-    require_chef_omnibus: true
     require_chef_omnibus: "11.6.0"
     chef_omnibus_url: https://gist.github.com/hectcastro/6443633/raw/install.sh
     # Requires a patched version of kitchen-vagrant:
@@ -26,11 +25,34 @@ platforms:
         checksum:
           ubuntu:
             precise: "9dac7866c94266c23c9bdff0f94e2c697511ef676372ed1c5b615b2486600b3f"
+- name: debian-7.1.0
+  driver_config:
+    box: opscode-debian-7.1.0
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_debian-7.1.0_provisionerless.box
+    require_chef_omnibus: "11.6.0"
+    chef_omnibus_url: https://gist.github.com/hectcastro/6443633/raw/install.sh
+    # Requires a patched version of kitchen-vagrant:
+    # https://github.com/hectcastro/kitchen-vagrant/compare/hc-cachier
+    use_cachier_plugin: true
+    customize:
+      memory: 512
+  run_list:
+  - recipe[apt]
+  attributes:
+    riak:
+      package:
+        checksum:
+          debian:
+            "7": "ab5b07c9430aed4874020aa8c4688f1efa14f2a8fba5659fbcbf2004183b51fc"
+    riak_cs:
+      package:
+        checksum:
+          debian:
+            "7": "2454fb463a130666e74f1676c07e58f91cc8520fde6aa6a1b165f9691b8551b0"
 - name: centos-6.4
   driver_config:
     box: opscode-centos-6.4
     box_url: https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box
-    require_chef_omnibus: true
     require_chef_omnibus: "11.6.0"
     chef_omnibus_url: https://gist.github.com/hectcastro/6443633/raw/install.sh
     # Requires a patched version of kitchen-vagrant:
