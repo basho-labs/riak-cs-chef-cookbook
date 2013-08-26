@@ -10,6 +10,17 @@ platforms:
       memory: 512
   run_list:
   - recipe[apt]
+  attributes:
+    riak:
+      package:
+        checksum:
+          ubuntu:
+            precise: "3f29736ab0dc8b094272d9caefed4e795ae293f54f79bed8d0464ca821c865ef"
+    riak_cs:
+      package:
+        checksum:
+          ubuntu:
+            precise: "9dac7866c94266c23c9bdff0f94e2c697511ef676372ed1c5b615b2486600b3f"
 - name: centos-6.4
   driver_config:
     box: opscode-centos-6.4
@@ -19,6 +30,17 @@ platforms:
       memory: 512
   run_list:
   - recipe[yum::epel]
+  attributes:
+    riak:
+      package:
+        checksum:
+          centos:
+            "6": "a2234d09bdbf08da8b9bf5627b4ea718772fc4964c4d59bd3d4c8ada83d5a9f1"
+    riak_cs:
+      package:
+        checksum:
+          centos:
+            "6": "a742662649876943bbebac6f0af9e887e33a161d70dea040f8a1102c81c99ccc"
 suites:
 - name: default
   run_list:
