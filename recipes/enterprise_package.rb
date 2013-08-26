@@ -21,6 +21,7 @@
 version_str = "#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}.#{node['riak_cs']['package']['version']['incremental']}"
 base_uri = "http://private.downloads.basho.com/riak-cs-ee/#{node['riak_cs']['package']['enterprise_key']}/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
 base_filename = "riak-cs-ee-#{version_str}"
+checksum_val = node['riak_cs']['package']['checksum'][node['platform']][node['platform_version']]
 
 case node['riak_cs']['package']['type']
   when "binary"
@@ -49,9 +50,9 @@ package_name = package_file.split("[-_]\d+\.").first
 
 remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
   source package_uri
+  checksum checksum_val
   owner "root"
   mode 0644
-  not_if { File.exists?("#{Chef::Config[:file_cache_path]}#{package_file}") }
 end
 
 directory node['riak_cs']['package']['config_dir'] do
