@@ -1,6 +1,8 @@
 ## v2.2.2:
 
 * Remove `allow_mult` overrides in Test Kitchen suite.
+* Fixed the `remote_file` resource for Enterprise packages so that it utilizes
+  a checksum.
 
 ## v2.2.1:
 
