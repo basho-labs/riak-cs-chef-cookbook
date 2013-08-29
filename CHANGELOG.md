@@ -1,5 +1,6 @@
 ## v2.2.2:
 
+* Riak `1.4.2` is now the default.
 * Remove `allow_mult` overrides in Test Kitchen suite.
 * Fixed the `remote_file` resource for Enterprise packages so that it utilizes
   a checksum.

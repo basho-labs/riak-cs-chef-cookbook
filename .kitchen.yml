@@ -15,7 +15,7 @@ platforms:
       package:
         checksum:
           ubuntu:
-            precise: "3f29736ab0dc8b094272d9caefed4e795ae293f54f79bed8d0464ca821c865ef"
+            precise: "b4e4e31b8e1cd25ea4d3bcd9af94e7322ce1c08645425891574f57ba58f8c516"
     riak_cs:
       package:
         checksum:
@@ -35,7 +35,7 @@ platforms:
       package:
         checksum:
           centos:
-            "6": "a2234d09bdbf08da8b9bf5627b4ea718772fc4964c4d59bd3d4c8ada83d5a9f1"
+            "6": "5bfed85a02df7f297cf20402f147997b06c8ea59dbe860186a54e9dec2dc26e2"
     riak_cs:
       package:
         checksum:
@@ -71,7 +71,7 @@ suites:
       package:
         version:
           minor: 4
-          incremental: 1
+          incremental: 2
       config:
         riak_kv:
           storage_backend: riak_cs_kv_multi_backend
@@ -138,7 +138,7 @@ suites:
       package:
         version:
           minor: 4
-          incremental: 1
+          incremental: 2
         enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
       config:
         riak_kv:
@@ -173,7 +173,7 @@ suites:
       package:
         version:
           minor: 3
-          incremental: 2
+          incremental: 3
         enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
       config:
         riak_kv:
