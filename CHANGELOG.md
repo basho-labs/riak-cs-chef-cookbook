@@ -3,6 +3,7 @@
 * Remove `allow_mult` overrides in Test Kitchen suite.
 * Fixed the `remote_file` resource for Enterprise packages so that it utilizes
   a checksum.
+* Update Riak CS attribute defaults for `1.4.0`.
 
 ## v2.2.1:
 
