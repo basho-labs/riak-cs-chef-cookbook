@@ -5,6 +5,8 @@
 * Fixed the `remote_file` resource for Enterprise packages so that it utilizes
   a checksum.
 * Update Riak CS attribute defaults for `1.4.0`.
+* Made Test Kitchen run faster by enabling the `vagrant-cachier` plugin
+  through the `kitchen-vagrant` driver.
 
 ## v2.2.1:
 
