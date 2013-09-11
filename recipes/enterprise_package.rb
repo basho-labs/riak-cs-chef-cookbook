@@ -32,7 +32,7 @@ case node['riak_cs']['package']['type']
       package_file = "#{base_filename.sub(/ee-/,'ee_')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
     when "debian"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
-      base_uri = "#{base_uri}#{node['platform']}/squeeze/"
+      base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
       package_file = "#{base_filename.sub(/ee-/,'ee_')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
     when "redhat", "centos", "scientific", "amazon"
       machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
