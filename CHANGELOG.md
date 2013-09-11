@@ -1,3 +1,7 @@
+## v2.2.3:
+
+* Add Debian Wheezy to Test Kitchen suite.
+
 ## v2.2.2:
 
 * Riak `1.4.2` is now the default.
@@ -7,7 +11,6 @@
 * Update Riak CS attribute defaults for `1.4+`.
 * Made Test Kitchen run faster by enabling the `vagrant-cachier` plugin
   through the `kitchen-vagrant` driver.
-* Add Debian Wheezy to Test Kitchen suite.
 
 ## v2.2.1:
 
