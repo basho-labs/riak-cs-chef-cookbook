@@ -1,6 +1,8 @@
 ## v2.2.3:
 
 * Add Debian Wheezy to Test Kitchen suite.
+* Riak CS `1.4.1` is now the default.
+* Riak CS Control `1.0.2` is now the default.
 
 ## v2.2.2:
 

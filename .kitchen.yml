@@ -24,7 +24,7 @@ platforms:
       package:
         checksum:
           ubuntu:
-            precise: "9dac7866c94266c23c9bdff0f94e2c697511ef676372ed1c5b615b2486600b3f"
+            precise: "4349a4a9e2aeca766491ca41fdeff4a0946b14cd5aff85d55f872232ae7e483c"
 - name: debian-7.1.0
   driver_config:
     box: opscode-debian-7.1.0
@@ -72,7 +72,7 @@ platforms:
       package:
         checksum:
           centos:
-            "6": "a742662649876943bbebac6f0af9e887e33a161d70dea040f8a1102c81c99ccc"
+            "6": "cfd2f4b60ec61aeaf059ef91cc2493b877daf558e3c62e7eb8d4e2a616bdd0e7"
 suites:
 - name: default
   run_list:
@@ -87,19 +87,19 @@ suites:
       package:
         version:
           minor: 4
-          incremental: 0
+          incremental: 1
     stanchion:
       package:
         version:
           minor: 4
-          incremental: 0
+          incremental: 1
     riak_cs_control:
       package:
         version:
           minor: 0
-          incremental: 1
+          incremental: 2
     riak:
-      cs_version: "1.4.0"
+      cs_version: "1.4.1"
       package:
         version:
           minor: 4
@@ -154,19 +154,19 @@ suites:
         enterprise_key: <%= (ENV["RIAK_CS_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_CS_ENTERPRISE_KEY"]) %>
         version:
           minor: 4
-          incremental: 0
+          incremental: 1
     stanchion:
       package:
         version:
           minor: 4
-          incremental: 0
+          incremental: 1
     riak_cs_control:
       package:
         version:
           minor: 0
-          incremental: 1
+          incremental: 2
     riak:
-      cs_version: "1.4.0"
+      cs_version: "1.4.1"
       package:
         version:
           minor: 4
