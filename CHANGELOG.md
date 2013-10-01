@@ -1,3 +1,7 @@
+## v2.2.4:
+
+* Fix invalid `cs_version`.
+
 ## v2.2.3:
 
 * Add Debian Wheezy to Test Kitchen suite.
