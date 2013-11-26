@@ -1,5 +1,7 @@
 ## v2.2.4:
 
+* Riak CS `1.4.3` is now the default.
+* Bumped Chef to version `11.8.0` for Test Kitchen.
 * Fix invalid `cs_version`.
 
 ## v2.2.3:
