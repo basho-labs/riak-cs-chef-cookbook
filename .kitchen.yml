@@ -61,6 +61,26 @@ platforms:
         checksum:
           centos:
             "6": "ac1b375de7ac76f3df3d80832b9da2262d4c6b229e43a9918ac46329eda1cc60"
+- name: centos-5.9
+  driver_config:
+    box: opscode-centos-5.9
+    box_url: https://opscode-vm-bento.s3.amazonaws.com/vagrant/opscode_centos-5.9_provisionerless.box
+    vagrantfile_erb: Vagrantfile.erb
+    customize:
+      memory: 512
+  run_list:
+  - recipe[yum::epel]
+  attributes:
+    riak:
+      package:
+        checksum:
+          centos:
+            "5": "c821ddea30cdce72464909ea0a6dd2bb9e0dada4041e2b56e3569bad11a5f869"
+    riak_cs:
+      package:
+        checksum:
+          centos:
+            "5": "a3dd62e05b3bd0ff78739554f4248196680afea6ccf0b948f8077f9ed81ff384"
 suites:
 - name: default
   run_list:
