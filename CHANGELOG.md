@@ -1,3 +1,7 @@
+## v2.2.5:
+
+* Make use of `vagrantfile_erb` setting of kitchen-vagrant.
+
 ## v2.2.4:
 
 * Riak CS `1.4.3` is now the default.
