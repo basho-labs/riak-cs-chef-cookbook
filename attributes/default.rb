@@ -76,7 +76,6 @@ default['riak_cs']['config']['webmachine']['server_name'] = "Riak CS".to_erl_str
 default['riak_cs']['config']['webmachine']['log_handlers']['webmachine_log_handler'] = ["/var/log/riak-cs".to_erl_string].to_erl_list
 default['riak_cs']['config']['webmachine']['log_handlers']['riak_cs_access_log_handler'] = [].to_erl_list
 
-
 # lager
 error_log = ["/var/log/riak-cs/error.log".to_erl_string,"error",10485760,"$D0".to_erl_string,5].to_erl_tuple
 info_log = ["/var/log/riak-cs/console.log".to_erl_string,"info",10485760,"$D0".to_erl_string,5].to_erl_tuple
@@ -94,3 +93,19 @@ default['riak_cs']['config']['sasl']['utc_log'] = true
 
 # limits
 default['riak_cs']['limits']['nofile'] = 4096
+
+# sysctl
+default['riak_cs']['sysctl']['vm']['swappiness'] = 0
+default['riak_cs']['sysctl']['net']['core']['wmem_default'] = 8388608
+default['riak_cs']['sysctl']['net']['core']['rmem_default'] = 8388608
+default['riak_cs']['sysctl']['net']['core']['wmem_max'] = 8388608
+default['riak_cs']['sysctl']['net']['core']['rmem_max'] = 8388608
+default['riak_cs']['sysctl']['net']['core']['netdev_max_backlog'] = 10000
+default['riak_cs']['sysctl']['net']['core']['somaxconn'] = 4000
+default['riak_cs']['sysctl']['net']['ipv4']['tcp_max_syn_backlog'] = 40000
+default['riak_cs']['sysctl']['net']['ipv4']['tcp_timestamps'] = 0
+default['riak_cs']['sysctl']['net']['ipv4']['tcp_sack'] = 1
+default['riak_cs']['sysctl']['net']['ipv4']['tcp_window_scaling'] = 1
+default['riak_cs']['sysctl']['net']['ipv4']['tcp_fin_timeout'] = 15
+default['riak_cs']['sysctl']['net']['ipv4']['tcp_keepalive_intvl'] = 30
+default['riak_cs']['sysctl']['net']['ipv4']['tcp_tw_reuse'] = 1

@@ -29,7 +29,7 @@ recipe            "enterprise_package", "Installs Riak CS Enterprise"
 recipe            "stanchion", "Installs Stanchion"
 recipe            "control", "Installs Riak CS Control"
 
-%w{ulimit}.each do |d|
+%w{apt yum sysctl ulimit}.each do |d|
   depends d
 end
 
