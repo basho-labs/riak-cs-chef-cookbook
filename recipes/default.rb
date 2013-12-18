@@ -53,6 +53,22 @@ else
   end
 end
 
+node.default["sysctl"]["params"]["vm"]["swappiness"] = node['riak_cs']['sysctl']['vm']['swappiness']
+node.default["sysctl"]["params"]["net"]["core"]["wmem_default"] = node['riak_cs']['sysctl']['net']['core']['wmem_default']
+node.default["sysctl"]["params"]["net"]["core"]["rmem_default"] = node['riak_cs']['sysctl']['net']['core']['rmem_default']
+node.default["sysctl"]["params"]["net"]["core"]["wmem_max"] = node['riak_cs']['sysctl']['net']['core']['wmem_max']
+node.default["sysctl"]["params"]["net"]["core"]["rmem_max"] = node['riak_cs']['sysctl']['net']['core']['rmem_max']
+node.default["sysctl"]["params"]["net"]["core"]["netdev_max_backlog"] = node['riak_cs']['sysctl']['net']['core']['netdev_max_backlog']
+node.default["sysctl"]["params"]["net"]["core"]["somaxconn"] = node['riak_cs']['sysctl']['net']['core']['somaxconn']
+node.default["sysctl"]["params"]["net"]["ipv4"]["tcp_max_syn_backlog"] = node['riak_cs']['sysctl']['net']['ipv4']['tcp_max_syn_backlog']
+node.default["sysctl"]["params"]["net"]["ipv4"]["tcp_timestamps"] = node['riak_cs']['sysctl']['net']['ipv4']['tcp_timestamps']
+node.default["sysctl"]["params"]["net"]["ipv4"]["tcp_sack"] = node['riak_cs']['sysctl']['net']['ipv4']['tcp_sack']
+node.default["sysctl"]["params"]["net"]["ipv4"]["tcp_window_scaling"] = node['riak_cs']['sysctl']['net']['ipv4']['tcp_window_scaling']
+node.default["sysctl"]["params"]["net"]["ipv4"]["tcp_fin_timeout"] = node['riak_cs']['sysctl']['net']['ipv4']['tcp_fin_timeout']
+node.default["sysctl"]["params"]["net"]["ipv4"]["tcp_keepalive_intvl"] = node['riak_cs']['sysctl']['net']['ipv4']['tcp_keepalive_intvl']
+node.default["sysctl"]["params"]["net"]["ipv4"]["tcp_tw_reuse"] = node['riak_cs']['sysctl']['net']['ipv4']['tcp_tw_reuse']
+
+
 service "riak-cs" do
   supports :start => true, :stop => true, :restart => true
   action [ :enable, :start ]

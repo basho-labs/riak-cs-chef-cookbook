@@ -1,6 +1,7 @@
 ## v2.2.5:
 
 * Make use of `vagrantfile_erb` setting of kitchen-vagrant.
+* Added kernel and network tuning via sysctl.
 
 ## v2.2.4:
 
