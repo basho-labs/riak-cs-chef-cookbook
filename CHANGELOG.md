@@ -1,5 +1,6 @@
 ## v2.2.5:
 
+* Riak `1.4.7` is now the default.
 * Make use of `vagrantfile_erb` setting of kitchen-vagrant.
 
 ## v2.2.4:
