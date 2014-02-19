@@ -21,7 +21,7 @@ platforms:
       package:
         checksum:
           ubuntu:
-            precise: "06896c4e46b99677f56729486b9a37d00f033f170574d11a4a7aee1e4e225a70"
+            precise: "035c1f5172c0110ee825c60e683983bee69075df1663fe1fb81dbf8da500def7"
 - name: debian-7.2.0
   driver_config:
     box: opscode-debian-7.2.0
@@ -41,7 +41,7 @@ platforms:
       package:
         checksum:
           debian:
-            "7": "e99e53cfcce112529fadf2fa785c9c059be298b85065de3602121f9c12c374a9"
+            "7": "d5ea187d4e0d95e65d0e3e1d82e331bdb027e4f1e5419b0831bee2b0a20efb8a"
 - name: centos-6.5
   driver_config:
     box: opscode-centos-6.5
@@ -61,7 +61,7 @@ platforms:
       package:
         checksum:
           centos:
-            "6": "ac1b375de7ac76f3df3d80832b9da2262d4c6b229e43a9918ac46329eda1cc60"
+            "6": "9282097cce71ad68d8412e34a2973ec213572c60d03db14a961b26b48ff853c5"
 - name: centos-5.10
   driver_config:
     box: opscode-centos-5.10
@@ -81,7 +81,7 @@ platforms:
       package:
         checksum:
           centos:
-            "5": "a3dd62e05b3bd0ff78739554f4248196680afea6ccf0b948f8077f9ed81ff384"
+            "5": "46d09fb24a6c10347cf112a164932ead8ef746bc7d31473fa54df94f68e941ca"
 suites:
 - name: default
   run_list:
@@ -95,11 +95,13 @@ suites:
     riak_cs:
       package:
         version:
+          major: 1
           minor: 4
-          incremental: 3
+          incremental: 4
     stanchion:
       package:
         version:
+          major: 1
           minor: 4
           incremental: 3
     riak_cs_control:
@@ -108,7 +110,7 @@ suites:
           minor: 0
           incremental: 2
     riak:
-      cs_version: "1.4.3"
+      cs_version: "1.4.4"
       package:
         version:
           minor: 4
@@ -128,22 +130,26 @@ suites:
     riak_cs:
       package:
         version:
+          major: 1
           minor: 3
           incremental: 1
     stanchion:
       package:
         version:
+          major: 1
           minor: 3
           incremental: 1
     riak_cs_control:
       package:
         version:
+          major: 1
           minor: 0
           incremental: 0
     riak:
       cs_version: "1.3.1"
       package:
         version:
+          major: 1
           minor: 3
           incremental: 2
       config:
@@ -162,22 +168,26 @@ suites:
       package:
         enterprise_key: <%= (ENV["RIAK_CS_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_CS_ENTERPRISE_KEY"]) %>
         version:
+          major: 1
           minor: 4
-          incremental: 3
+          incremental: 4
     stanchion:
       package:
         version:
+          major: 1
           minor: 4
           incremental: 3
     riak_cs_control:
       package:
         version:
+          major: 1
           minor: 0
           incremental: 2
     riak:
-      cs_version: "1.4.3"
+      cs_version: "1.4.4"
       package:
         version:
+          major: 1
           minor: 4
           incremental: 7
         enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
@@ -197,22 +207,26 @@ suites:
       package:
         enterprise_key: <%= (ENV["RIAK_CS_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_CS_ENTERPRISE_KEY"]) %>
         version:
+          major: 1
           minor: 3
           incremental: 1
     stanchion:
       package:
         version:
+          major: 1
           minor: 3
           incremental: 1
     riak_cs_control:
       package:
         version:
+          major: 1
           minor: 0
           incremental: 0
     riak:
       cs_version: "1.3.1"
       package:
         version:
+          major: 1
           minor: 3
           incremental: 4
         enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
