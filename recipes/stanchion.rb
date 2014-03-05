@@ -27,8 +27,6 @@ package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build
 
 case node['platform_family']
 when "debian"
-  include_recipe "apt"
-
   apt_repository "basho" do
     uri "http://apt.basho.com"
     distribution node['lsb']['codename']
@@ -41,8 +39,6 @@ when "debian"
     version package_version
   end
 when "rhel"
-  include_recipe "yum"
-
   yum_key "RPM-GPG-KEY-basho" do
     url "http://yum.basho.com/gpg/RPM-GPG-KEY-basho"
     action :add
