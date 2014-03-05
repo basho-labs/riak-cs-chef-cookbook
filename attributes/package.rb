@@ -23,6 +23,6 @@ default['riak_cs']['package']['url'] = "http://s3.amazonaws.com/downloads.basho.
 default['riak_cs']['package']['type'] = "binary"
 default['riak_cs']['package']['version']['major'] = "1"
 default['riak_cs']['package']['version']['minor'] = "4"
-default['riak_cs']['package']['version']['incremental'] = "4"
+default['riak_cs']['package']['version']['incremental'] = "5"
 default['riak_cs']['package']['version']['build'] = "1"
 default['riak_cs']['package']['config_dir'] = "/etc/riak-cs"
