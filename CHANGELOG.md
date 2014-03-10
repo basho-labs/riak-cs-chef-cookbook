@@ -1,3 +1,11 @@
+## v2.2.6:
+
+* Riak `1.4.8` is now the default.
+* Riak CS `1.4.5` is now the default.
+* Updated yum dependency constraint.
+* Make all cookbook dependency versions explicit.
+* Ensure /etc/default/riak is regenerated when open file limits change.
+
 ## v2.2.5:
 
 * Riak `1.4.7` is now the default.
