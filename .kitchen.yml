@@ -107,12 +107,14 @@ suites:
     riak_cs_control:
       package:
         version:
+          major: 1
           minor: 0
           incremental: 2
     riak:
       cs_version: "1.4.5"
       package:
         version:
+          major: 1
           minor: 4
           incremental: 8
       config:
