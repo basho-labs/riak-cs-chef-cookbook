@@ -37,16 +37,10 @@ when "debian"
     version package_version
   end
 when "rhel"
-  yum_key "RPM-GPG-KEY-basho" do
-    url "http://yum.basho.com/gpg/RPM-GPG-KEY-basho"
-    action :add
-  end
-
   yum_repository "basho" do
-    repo_name "basho"
     description "Basho Stable Repo"
     url "http://yum.basho.com/el/#{platform_version}/products/x86_64/"
-    key "RPM-GPG-KEY-basho"
+    gpgkey "http://yum.basho.com/gpg/RPM-GPG-KEY-basho"
     action :add
   end
 

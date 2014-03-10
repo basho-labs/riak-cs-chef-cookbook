@@ -29,12 +29,11 @@ recipe            "enterprise_package", "Installs Riak CS Enterprise"
 recipe            "stanchion", "Installs Stanchion"
 recipe            "control", "Installs Riak CS Control"
 
-%w{riak ulimit}.each do |d|
-  depends d
-end
-
 depends "apt", "~> 2.3.8"
-depends "yum", "< 3.0"
+depends "riak", "~> 2.4.7"
+depends "ulimit", "~> 0.3.2"
+depends "yum", "~> 3.0"
+depends "yum-epel", "~> 0.3"
 
 %w{ubuntu debian redhat centos scientific oracle amazon}.each do |os|
   supports os
