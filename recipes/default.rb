@@ -44,7 +44,7 @@ if node['platform_family'] == "debian"
     content "ulimit -n #{node['riak_cs']['limits']['nofile']}"
     owner "root"
     mode 0644
-    action :create_if_missing
+    action :create
     notifies :restart, "service[riak-cs]"
   end
 else
