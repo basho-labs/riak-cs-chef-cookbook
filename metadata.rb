@@ -31,7 +31,7 @@ recipe            "control", "Installs Riak CS Control"
 
 depends "apt", "~> 2.3.8"
 depends "riak", "~> 2.4.7"
-depends "ulimit"
+depends "ulimit", "~> 0.3.2"
 depends "yum", "~> 3.0"
 depends "yum-epel", "~> 0.3"
 

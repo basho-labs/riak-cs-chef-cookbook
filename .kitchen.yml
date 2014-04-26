@@ -1,14 +1,30 @@
 ---
-driver_plugin: vagrant
+driver:
+  name: vagrant
+  require_chef_omnibus: true
+  customize:
+    memory: 512
+
+provisioner:
+  name: chef_solo
+  root_path: /home/vagrant/kitchen
 
 platforms:
+- name: ubuntu-13.04
+  run_list:
+  - recipe[apt]
+  attributes:
+    riak:
+      package:
+        checksum:
+          ubuntu:
+            precise: "280c816e5dc4a83e3bc5e82d011fed4b3fb83098b81df2997aa17462261c86e6"
+    riak_cs:
+      package:
+        checksum:
+          ubuntu:
+            precise: "6d6e8c7e25ebd831a892cc451d38bd00d92b1af9ab0490a061c639d91fa8b2a8"
 - name: ubuntu-12.04
-  driver_config:
-    box: opscode-ubuntu-12.04
-    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
-    vagrantfile_erb: Vagrantfile.erb
-    customize:
-      memory: 512
   run_list:
   - recipe[apt]
   attributes:
@@ -23,12 +39,6 @@ platforms:
           ubuntu:
             precise: "6d6e8c7e25ebd831a892cc451d38bd00d92b1af9ab0490a061c639d91fa8b2a8"
 - name: debian-7.2.0
-  driver_config:
-    box: opscode-debian-7.2.0
-    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_debian-7.2.0_chef-provisionerless.box
-    vagrantfile_erb: Vagrantfile.erb
-    customize:
-      memory: 512
   run_list:
   - recipe[apt]
   attributes:
@@ -43,12 +53,6 @@ platforms:
           debian:
             "7": "2aec430d568b7d180ffecef33219014f838888ba41be96cfbc4d796c06c715c9"
 - name: centos-6.5
-  driver_config:
-    box: opscode-centos-6.5
-    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-6.5_chef-provisionerless.box
-    vagrantfile_erb: Vagrantfile.erb
-    customize:
-      memory: 512
   run_list:
   - recipe[yum-epel]
   attributes:
@@ -63,12 +67,6 @@ platforms:
           centos:
             "6": "cfaaea1a59fb4b850f5a54825f996fcee96b554c89569dc00d9d2a7e96516a05"
 - name: centos-5.10
-  driver_config:
-    box: opscode-centos-5.10
-    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_centos-5.10_chef-provisionerless.box
-    vagrantfile_erb: Vagrantfile.erb
-    customize:
-      memory: 512
   run_list:
   - recipe[yum-epel]
   attributes:
@@ -82,6 +80,7 @@ platforms:
         checksum:
           centos:
             "5": "11c52f02969f8ce6580a7bad55b09fd2c96a0ef28bc8b98b306cbc0d838f759d"
+
 suites:
 - name: default
   run_list:

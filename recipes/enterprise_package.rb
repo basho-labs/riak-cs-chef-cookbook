@@ -28,7 +28,7 @@ case node['riak_cs']['package']['type']
     case node['platform']
     when "ubuntu"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
-      base_uri = "#{base_uri}#{node['platform']}/#{node['lsb']['codename']}/"
+      base_uri = "#{base_uri}#{node['platform']}/#{node['lsb']['codename'] == "raring" ? "precise" : node['lsb']['codename']}/"
       package_file = "#{base_filename.sub(/ee-/,'ee_')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
     when "debian"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
