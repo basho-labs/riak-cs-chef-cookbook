@@ -6,13 +6,10 @@ driver:
     memory: 512
 
 provisioner:
-  name: chef_solo
-  root_path: /home/vagrant/kitchen
+  name: chef_zero
 
 platforms:
 - name: ubuntu-13.04
-  run_list:
-  - recipe[apt]
   attributes:
     riak:
       package:
@@ -25,8 +22,6 @@ platforms:
           ubuntu:
             precise: "6d6e8c7e25ebd831a892cc451d38bd00d92b1af9ab0490a061c639d91fa8b2a8"
 - name: ubuntu-12.04
-  run_list:
-  - recipe[apt]
   attributes:
     riak:
       package:
@@ -39,8 +34,6 @@ platforms:
           ubuntu:
             precise: "6d6e8c7e25ebd831a892cc451d38bd00d92b1af9ab0490a061c639d91fa8b2a8"
 - name: debian-7.2.0
-  run_list:
-  - recipe[apt]
   attributes:
     riak:
       package:
@@ -53,8 +46,6 @@ platforms:
           debian:
             "7": "2aec430d568b7d180ffecef33219014f838888ba41be96cfbc4d796c06c715c9"
 - name: centos-6.5
-  run_list:
-  - recipe[yum-epel]
   attributes:
     riak:
       package:
@@ -67,8 +58,6 @@ platforms:
           centos:
             "6": "cfaaea1a59fb4b850f5a54825f996fcee96b554c89569dc00d9d2a7e96516a05"
 - name: centos-5.10
-  run_list:
-  - recipe[yum-epel]
   attributes:
     riak:
       package:
@@ -97,6 +86,10 @@ suites:
           major: 1
           minor: 4
           incremental: 5
+      config:
+        riak_cs:
+          cs_ip: "__string_0.0.0.0"
+          anonymous_user_creation: true
     stanchion:
       package:
         version:
@@ -119,6 +112,53 @@ suites:
       config:
         riak_kv:
           storage_backend: riak_cs_kv_multi_backend
+- name: default-ssl
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[riak-cs::package]
+  - recipe[riak]
+  - recipe[riak-cs-ssl]
+  - recipe[riak-cs-create-admin-user]
+  attributes:
+    riak_cs:
+      package:
+        version:
+          major: 1
+          minor: 4
+          incremental: 5
+      config:
+        riak_cs:
+          cs_ip: "__string_0.0.0.0"
+          anonymous_user_creation: true
+    stanchion:
+      package:
+        version:
+          major: 1
+          minor: 4
+          incremental: 3
+    riak_cs_control:
+      package:
+        version:
+          major: 1
+          minor: 0
+          incremental: 2
+      config:
+        riak_cs_control:
+          cs_protocol: "__string_https"
+    riak:
+      cs_version: "1.4.5"
+      package:
+        version:
+          major: 1
+          minor: 4
+          incremental: 8
+      config:
+        riak_kv:
+          storage_backend: riak_cs_kv_multi_backend
+    riak_cs_create_admin_user:
+      scheme: "https"
+      verify_mode: "peer"
+      ca_file: "/etc/riak-cs/riak-cs-cert.pem"
 - name: default13
   run_list:
   - recipe[minitest-handler]
@@ -172,6 +212,10 @@ suites:
           major: 1
           minor: 4
           incremental: 5
+      config:
+        riak_cs:
+          cs_ip: "__string_0.0.0.0"
+          anonymous_user_creation: true
     stanchion:
       package:
         version:
@@ -195,6 +239,55 @@ suites:
       config:
         riak_kv:
           storage_backend: riak_cs_kv_multi_backend
+- name: enterprise-ssl
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[riak-cs::enterprise_package]
+  - recipe[riak]
+  - recipe[riak-cs-ssl]
+  - recipe[riak-cs-create-admin-user]
+  attributes:
+    riak_cs:
+      package:
+        enterprise_key: <%= (ENV["RIAK_CS_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_CS_ENTERPRISE_KEY"]) %>
+        version:
+          major: 1
+          minor: 4
+          incremental: 5
+      config:
+        riak_cs:
+          cs_ip: "__string_0.0.0.0"
+          anonymous_user_creation: true
+    stanchion:
+      package:
+        version:
+          major: 1
+          minor: 4
+          incremental: 3
+    riak_cs_control:
+      package:
+        version:
+          major: 1
+          minor: 0
+          incremental: 2
+      config:
+        riak_cs_control:
+          cs_protocol: "__string_https"
+    riak:
+      cs_version: "1.4.5"
+      package:
+        version:
+          major: 1
+          minor: 4
+          incremental: 8
+        enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
+      config:
+        riak_kv:
+          storage_backend: riak_cs_kv_multi_backend
+    riak_cs_create_admin_user:
+      scheme: "https"
+      verify_mode: "peer"
+      ca_file: "/etc/riak-cs/riak-cs-cert.pem"
 - name: enterprise13
   run_list:
   - recipe[minitest-handler]
