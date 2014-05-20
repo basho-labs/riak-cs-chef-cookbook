@@ -21,7 +21,8 @@
 version_str = "#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}.#{node['riak_cs']['package']['version']['incremental']}"
 base_uri = "http://private.downloads.basho.com/riak-cs-ee/#{node['riak_cs']['package']['enterprise_key']}/#{node['riak_cs']['package']['version']['major']}.#{node['riak_cs']['package']['version']['minor']}/#{version_str}/"
 base_filename = "riak-cs-ee-#{version_str}"
-checksum_val = node['riak_cs']['package']['checksum'][node['platform']][node['platform_version']]
+platform_version = node['platform_version'].to_i
+checksum_val = node['riak_cs']['package']['checksum'][node['platform']][platform_version]
 
 case node['riak_cs']['package']['type']
   when "binary"
@@ -32,16 +33,21 @@ case node['riak_cs']['package']['type']
       package_file = "#{base_filename.sub(/ee-/,'ee_')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
     when "debian"
       machines = {"x86_64" => "amd64", "i386" => "i386", "i686" => "i386"}
-      base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
+      base_uri = "#{base_uri}#{node['platform']}/#{platform_version}/"
       package_file = "#{base_filename.sub(/ee-/,'ee_')}-#{node['riak_cs']['package']['version']['build']}_#{machines[node['kernel']['machine']]}.deb"
     when "redhat", "centos", "scientific", "amazon"
+      if node['platform'] == "amazon" && platform_version >= 2013
+        platform_version = 6
+      elsif node['platform'] == "amazon"
+        platform_version = 5
+      end
       machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
-      base_uri = "#{base_uri}rhel/#{node['platform_version'].to_i}/"
-      package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.el#{node['platform_version'].to_i}.#{machines[node['kernel']['machine']]}.rpm"
+      base_uri = "#{base_uri}rhel/#{platform_version}/"
+      package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.el#{platform_version}.#{machines[node['kernel']['machine']]}.rpm"
     when "fedora"
       machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
-      base_uri = "#{base_uri}#{node['platform']}/#{node['platform_version'].to_i}/"
-      package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.fc#{node['platform_version'].to_i}.#{node['kernel']['machine']}.rpm"
+      base_uri = "#{base_uri}#{node['platform']}/#{platform_version}/"
+      package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.fc#{platform_version}.#{node['kernel']['machine']}.rpm"
     end
   end
 
