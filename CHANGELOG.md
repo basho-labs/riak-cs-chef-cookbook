@@ -1,3 +1,7 @@
+## v2.2.7:
+
+* Add support for Amazon Linux.
+
 ## v2.2.6:
 
 * Riak `1.4.8` is now the default.
