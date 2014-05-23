@@ -39,9 +39,14 @@ when "debian"
     version package_version
   end
 when "rhel"
+  if node['platform'] == "amazon" && platform_version >= 2013
+    platform_version = 6
+  elsif node['platform'] == "amazon"
+    platform_version = 5
+  end
   yum_repository "basho" do
     description "Basho Stable Repo"
-    url "http://yum.basho.com/el/#{node['platform_version'].to_i}/products/x86_64/"
+    url "http://yum.basho.com/el/#{platform_version}/products/x86_64/"
     gpgkey "http://yum.basho.com/gpg/RPM-GPG-KEY-basho"
     action :add
   end

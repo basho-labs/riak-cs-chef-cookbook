@@ -37,6 +37,11 @@ when "debian"
     version package_version
   end
 when "rhel"
+  if node['platform'] == "amazon" && platform_version >= 2013
+    platform_version = 6
+  elsif node['platform'] == "amazon"
+    platform_version = 5
+  end
   yum_repository "basho" do
     description "Basho Stable Repo"
     url "http://yum.basho.com/el/#{platform_version}/products/x86_64/"
