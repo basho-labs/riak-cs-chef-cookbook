@@ -1,9 +1,8 @@
 #
-# Author:: Hector Castro (<hector@basho.com>)
 # Cookbook Name:: riak-cs
 # Recipe:: package
 #
-# Copyright (c) 2013 Basho Technologies, Inc.
+# Copyright (c) 2013-2014 Basho Technologies, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,12 +25,9 @@ package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build
 
 case node['platform_family']
 when "debian"
-  apt_repository "basho" do
-    uri "http://apt.basho.com"
-    distribution (node['lsb']['codename'] == "raring" ? "precise" : node['lsb']['codename'])
 
-    components ["main"]
-    key "http://apt.basho.com/gpg/basho.apt.key"
+  packagecloud_repo "basho/riak-cs" do
+    type "deb"
   end
 
   package "riak-cs" do
@@ -44,11 +40,9 @@ when "rhel"
   elsif node['platform'] == "amazon"
     platform_version = 5
   end
-  yum_repository "basho" do
-    description "Basho Stable Repo"
-    url "http://yum.basho.com/el/#{platform_version}/products/x86_64/"
-    gpgkey "http://yum.basho.com/gpg/RPM-GPG-KEY-basho"
-    action :add
+
+  packagecloud_repo "basho/riak-cs" do
+    type "rpm"
   end
 
   if platform_version >= 6

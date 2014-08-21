@@ -1,8 +1,7 @@
 #
-# Author::Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>)
 # Cookbook Name:: riak_cs
 #
-# Copyright (c) 2013 Basho Technologies, Inc.
+# Copyright (c) 2013-2014 Basho Technologies, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -21,8 +20,8 @@
 default['stanchion']['package']['url'] = "http://s3.amazonaws.com/downloads.basho.com/stanchion"
 default['stanchion']['package']['type'] = "binary"
 default['stanchion']['package']['version']['major'] = "1"
-default['stanchion']['package']['version']['minor'] = "4"
-default['stanchion']['package']['version']['incremental'] = "3"
+default['stanchion']['package']['version']['minor'] = "5"
+default['stanchion']['package']['version']['incremental'] = "0"
 default['stanchion']['package']['version']['build'] = "1"
 default['stanchion']['package']['config_dir'] = "/etc/stanchion"
 

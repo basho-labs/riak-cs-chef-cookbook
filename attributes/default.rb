@@ -1,8 +1,7 @@
 #
-# Author::Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>)
 # Cookbook Name:: riak-cs
 #
-# Copyright (c) 2012 Basho Technologies, Inc.
+# Copyright (c) 2012-2014 Basho Technologies, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -67,6 +66,7 @@ default['riak_cs']['config']['riak_cs']['storage_archive_period'] = 86400
 default['riak_cs']['config']['riak_cs']['usage_request_limit'] = 744
 default['riak_cs']['config']['riak_cs']['leeway_seconds'] = 86400
 default['riak_cs']['config']['riak_cs']['gc_interval'] = 900
+default['riak_cs']['config']['riak_cs']['gc_paginated_indexes'] = true
 default['riak_cs']['config']['riak_cs']['gc_retry_interval'] = 21600
 default['riak_cs']['config']['riak_cs']['trust_x_forwarded_for'] = false
 default['riak_cs']['config']['riak_cs']['dtrace_support'] = false
