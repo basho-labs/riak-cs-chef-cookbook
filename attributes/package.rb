@@ -1,8 +1,7 @@
 #
-# Author::Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>)
 # Cookbook Name:: riak-cs
 #
-# Copyright (c) 2013 Basho Technologies, Inc.
+# Copyright (c) 2013-2014 Basho Technologies, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,7 +21,7 @@ default['riak_cs']['package']['enterprise_key'] = ""
 default['riak_cs']['package']['url'] = "http://s3.amazonaws.com/downloads.basho.com/riak-cs"
 default['riak_cs']['package']['type'] = "binary"
 default['riak_cs']['package']['version']['major'] = "1"
-default['riak_cs']['package']['version']['minor'] = "4"
-default['riak_cs']['package']['version']['incremental'] = "5"
+default['riak_cs']['package']['version']['minor'] = "5"
+default['riak_cs']['package']['version']['incremental'] = "0"
 default['riak_cs']['package']['version']['build'] = "1"
 default['riak_cs']['package']['config_dir'] = "/etc/riak-cs"

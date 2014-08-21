@@ -15,8 +15,11 @@ node['riak_cs']['package']['enterprise_key']
 
 ## License and Author
 
-* Author: Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>), Hector Castro (<hector@basho.com>)
-* Copyright (c) 2013 Basho Technologies, Inc.
+* Author: Sean Carey (<densone@basho.com>), 
+* Author: Seth Thomas (<cheeseplus@polycount.com>)
+* Author: Hector Castro (<hector@basho.com>)
+
+* Copyright (c) 2012-2014 Basho Technologies, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
