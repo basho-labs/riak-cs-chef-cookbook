@@ -10,7 +10,7 @@ provisioner:
   require_chef_omnibus: latest
 
 platforms:
-- name: amazon-2014.03.1
+- name: amazon-2014.03.2
   driver:
     image_id: ami-ed8e9284
     username: ec2-user
@@ -22,13 +22,12 @@ platforms:
       package:
         checksum:
           amazon:
-            "2014": "2cf9f2481409d2871a6d453a9287f317bd4f5c1cb2e49432f4fee0ac106af56c"
+            "2014": "5f93a9ed1d7c9326297ebc432d69d1b03e941c057a7cfa37b45138045efdfb4f"
     riak_cs:
       package:
         checksum:
           amazon:
-            "2014": "cfaaea1a59fb4b850f5a54825f996fcee96b554c89569dc00d9d2a7e96516a05"
-
+            "2014": "5561c6452f82d0b3d204e30d1943c017bfe2829036c86e2538f296ce0800dde5"
 suites:
 - name: default
   run_list:
@@ -43,14 +42,14 @@ suites:
       package:
         version:
           major: 1
-          minor: 4
-          incremental: 5
+          minor: 5
+          incremental: 0
     stanchion:
       package:
         version:
           major: 1
-          minor: 4
-          incremental: 3
+          minor: 5
+          incremental: 0
     riak_cs_control:
       package:
         version:
@@ -58,11 +57,12 @@ suites:
           minor: 0
           incremental: 2
     riak:
+      cs_version: "1.5.0"
       package:
         version:
           major: 1
           minor: 4
-          incremental: 8
+          incremental: 10
       config:
         riak_kv:
           storage_backend: riak_cs_kv_multi_backend
@@ -80,14 +80,14 @@ suites:
         enterprise_key: <%= (ENV["RIAK_CS_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_CS_ENTERPRISE_KEY"]) %>
         version:
           major: 1
-          minor: 4
-          incremental: 5
+          minor: 5
+          incremental: 0
     stanchion:
       package:
         version:
           major: 1
-          minor: 4
-          incremental: 3
+          minor: 5
+          incremental: 0
     riak_cs_control:
       package:
         version:
@@ -99,7 +99,7 @@ suites:
         version:
           major: 1
           minor: 4
-          incremental: 8
+          incremental: 10
         enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
       config:
         riak_kv:

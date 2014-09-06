@@ -67,6 +67,7 @@ default['riak_cs']['config']['riak_cs']['storage_archive_period'] = 86400
 default['riak_cs']['config']['riak_cs']['usage_request_limit'] = 744
 default['riak_cs']['config']['riak_cs']['leeway_seconds'] = 86400
 default['riak_cs']['config']['riak_cs']['gc_interval'] = 900
+default['riak_cs']['config']['riak_cs']['gc_paginated_indexes'] = true
 default['riak_cs']['config']['riak_cs']['gc_retry_interval'] = 21600
 default['riak_cs']['config']['riak_cs']['trust_x_forwarded_for'] = false
 default['riak_cs']['config']['riak_cs']['dtrace_support'] = false
