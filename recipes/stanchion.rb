@@ -1,9 +1,7 @@
 #
-# Author:: Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>),
-#          Hector Castro (<hector@basho.com>)
 # Cookbook Name:: riak-cs
 #
-# Copyright (c) 2013 Basho Technologies, Inc.
+# Copyright (c) 2013-2014 Basho Technologies, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
