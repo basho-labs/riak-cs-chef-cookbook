@@ -12,7 +12,7 @@ provisioner:
 platforms:
 - name: amazon-2014.03.2
   driver:
-    image_id: ami-ed8e9284
+    image_id: ami-7c807d14
     username: ec2-user
     ssh_key: <%= ENV["EC2_SSH_KEY_PATH"] %>
   run_list:
