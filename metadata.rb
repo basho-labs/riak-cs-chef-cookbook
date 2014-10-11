@@ -1,8 +1,7 @@
 #
-# Author::Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>)
-# Cookbook Name:: riak_cs
+# Cookbook Name:: riak-cs
 #
-# Copyright (c) 2013 Basho Technologies, Inc.
+# Copyright (c) 2013-2014 Basho Technologies, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -30,11 +29,12 @@ recipe            "stanchion", "Installs Stanchion"
 recipe            "control", "Installs Riak CS Control"
 
 depends "apt", "~> 2.3.8"
-depends "riak", "~> 2.4.10"
+depends "riak", "~> 2.4.14"
 depends "ulimit", "~> 0.3.2"
 depends "yum", "~> 3.0"
 depends "yum-epel", "~> 0.3"
+depends "packagecloud"
 
-%w{ubuntu debian redhat centos scientific oracle amazon}.each do |os|
+%w{ubuntu debian redhat centos fedora amazon}.each do |os|
   supports os
 end

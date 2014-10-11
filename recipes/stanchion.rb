@@ -1,9 +1,7 @@
 #
-# Author:: Sean Carey (<densone@basho.com>), Seth Thomas (<sthomas@basho.com>),
-#          Hector Castro (<hector@basho.com>)
 # Cookbook Name:: riak-cs
 #
-# Copyright (c) 2013 Basho Technologies, Inc.
+# Copyright (c) 2013-2014 Basho Technologies, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
 include_recipe "ulimit" unless node['platform_family'] == "debian"
 
 version_str = "#{node['stanchion']['package']['version']['major']}.#{node['stanchion']['package']['version']['minor']}.#{node['stanchion']['package']['version']['incremental']}"
@@ -25,30 +24,25 @@ base_filename = "stanchion-#{version_str}"
 platform_version = node['platform_version'].to_i
 package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build']}"
 
-case node['platform_family']
-when "debian"
-  apt_repository "basho" do
-    uri "http://apt.basho.com"
-    distribution (node['lsb']['codename'] == "raring" ? "precise" : node['lsb']['codename'])
-    components ["main"]
-    key "http://apt.basho.com/gpg/basho.apt.key"
+case node['platform']
+when "debian","ubuntu"
+  packagecloud_repo "basho/riak-cs" do
+    type "deb"
   end
 
   package "stanchion" do
     action :install
     version package_version
   end
-when "rhel"
+when "redhat","centos"
   if node['platform'] == "amazon" && platform_version >= 2013
     platform_version = 6
   elsif node['platform'] == "amazon"
     platform_version = 5
   end
-  yum_repository "basho" do
-    description "Basho Stable Repo"
-    url "http://yum.basho.com/el/#{platform_version}/products/x86_64/"
-    gpgkey "http://yum.basho.com/gpg/RPM-GPG-KEY-basho"
-    action :add
+
+  packagecloud_repo "basho/riak-cs" do
+    type "rpm"
   end
 
   if platform_version >= 6
@@ -72,6 +66,30 @@ when "fedora"
     mode 0644
     not_if { File.exists?("#{Chef::Config[:file_cache_path]}/#{package_file}") }
   end
+
+  package package_name do
+    source "#{Chef::Config[:file_cache_path]}/#{package_file}"
+    action :install
+  end
+  when "amazon"
+  if node['platform'] == "amazon" && platform_version >= 2013
+    platform_version = 6
+  elsif node['platform'] == "amazon"
+    platform_version = 5
+  end
+
+  machines = {"x86_64" => "x86_64", "i386" => "i386", "i686" => "i686"}
+  base_uri = "#{base_uri}#{node['platform_family']}/#{platform_version}/"
+  package_file = "#{base_filename}-#{node['riak_cs']['package']['version']['build']}.el#{platform_version}.#{node['kernel']['machine']}.rpm"
+  package_uri = base_uri + package_file
+  package_name = package_file.split("[-_]\d+\.").first
+
+  remote_file "#{Chef::Config[:file_cache_path]}/#{package_file}" do
+    source package_uri
+    owner "root"
+    mode 0644
+    not_if { File.exists?("#{Chef::Config[:file_cache_path]}/#{package_file}") }
+  end  
 
   package package_name do
     source "#{Chef::Config[:file_cache_path]}/#{package_file}"
