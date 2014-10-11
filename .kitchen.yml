@@ -6,11 +6,10 @@ driver:
     memory: 512
 
 provisioner:
-  name: chef_solo
-  root_path: /home/vagrant/kitchen
+  name: chef_zero
 
 platforms:
-- name: ubuntu-13.04
+- name: ubuntu-14.04
   run_list:
   - recipe[apt]
   attributes:
@@ -18,12 +17,12 @@ platforms:
       package:
         checksum:
           ubuntu:
-            precise: "280c816e5dc4a83e3bc5e82d011fed4b3fb83098b81df2997aa17462261c86e6"
+            precise: "f2f5af17cce01a769d31517bbdba5a9e1b99e3581bcc4b33e970dbd0ef4140c6"
     riak_cs:
       package:
         checksum:
           ubuntu:
-            precise: "6d6e8c7e25ebd831a892cc451d38bd00d92b1af9ab0490a061c639d91fa8b2a8"
+            trusty: "d8772b5b8ead8e88e70d08c4f63f7231839f349c9b756805522b306a7705f616"
 - name: ubuntu-12.04
   run_list:
   - recipe[apt]
@@ -32,12 +31,12 @@ platforms:
       package:
         checksum:
           ubuntu:
-            precise: "280c816e5dc4a83e3bc5e82d011fed4b3fb83098b81df2997aa17462261c86e6"
+            precise: "f2f5af17cce01a769d31517bbdba5a9e1b99e3581bcc4b33e970dbd0ef4140c6"
     riak_cs:
       package:
         checksum:
           ubuntu:
-            precise: "6d6e8c7e25ebd831a892cc451d38bd00d92b1af9ab0490a061c639d91fa8b2a8"
+            precise: "e7bd92dac2a7cfe4a051759df0094d31f0f6029805b4baf0d6ae794acc14f1b7"
 - name: debian-7.2.0
   run_list:
   - recipe[apt]
@@ -46,12 +45,12 @@ platforms:
       package:
         checksum:
           debian:
-            "7": "ddc35ba5de39bb31a5f4d1b39627ac6b859dc176ff8a6890d95fb32b3f560589"
+            "7": "3bb6bcc409f51e303978fdb72c8605ac87a502e99bb5b7fda5ecd6af9c343d42"
     riak_cs:
       package:
         checksum:
           debian:
-            "7": "2aec430d568b7d180ffecef33219014f838888ba41be96cfbc4d796c06c715c9"
+            "7": "cd14f18802acaf123f7d5817664dc82bdab214672b7d4f0048cced4d6ec5317c"
 - name: centos-6.5
   run_list:
   - recipe[yum-epel]
@@ -60,12 +59,12 @@ platforms:
       package:
         checksum:
           centos:
-            "6": "2cf9f2481409d2871a6d453a9287f317bd4f5c1cb2e49432f4fee0ac106af56c"
+            "6": "5f93a9ed1d7c9326297ebc432d69d1b03e941c057a7cfa37b45138045efdfb4f"
     riak_cs:
       package:
         checksum:
           centos:
-            "6": "cfaaea1a59fb4b850f5a54825f996fcee96b554c89569dc00d9d2a7e96516a05"
+            "6": "5561c6452f82d0b3d204e30d1943c017bfe2829036c86e2538f296ce0800dde5"
 - name: centos-5.10
   run_list:
   - recipe[yum-epel]
@@ -74,15 +73,52 @@ platforms:
       package:
         checksum:
           centos:
-            "5": "3e6ea55c08c0e0c5d92195955275faed082d0b42fa8bde36e485bbf10b98cae7"
+            "5": "33c54fd0daccca7005bf65e152b4893d4fecd0cd70becdcde596fb935d93625e"
     riak_cs:
       package:
         checksum:
           centos:
-            "5": "11c52f02969f8ce6580a7bad55b09fd2c96a0ef28bc8b98b306cbc0d838f759d"
+            "5": "c29da52a573182453d0d018c81ff6075f5e4f0a0454fd6110993825b78599761"
 
 suites:
 - name: default
+  run_list:
+  - recipe[minitest-handler]
+  - recipe[riak-cs::package]
+  - recipe[riak]
+  - recipe[riak-cs]
+  - recipe[riak-cs::stanchion]
+  - recipe[riak-cs-create-admin-user]
+  attributes:
+    riak_cs:
+      package:
+        version:
+          major: 1
+          minor: 5
+          incremental: 0
+    stanchion:
+      package:
+        version:
+          major: 1
+          minor: 5
+          incremental: 0
+    riak_cs_control:
+      package:
+        version:
+          major: 1
+          minor: 0
+          incremental: 2
+    riak:
+      cs_version: "1.5.0"
+      package:
+        version:
+          major: 1
+          minor: 4
+          incremental: 10
+      config:
+        riak_kv:
+          storage_backend: riak_cs_kv_multi_backend
+- name: default14
   run_list:
   - recipe[minitest-handler]
   - recipe[riak-cs::package]
@@ -115,7 +151,7 @@ suites:
         version:
           major: 1
           minor: 4
-          incremental: 8
+          incremental: 10
       config:
         riak_kv:
           storage_backend: riak_cs_kv_multi_backend
