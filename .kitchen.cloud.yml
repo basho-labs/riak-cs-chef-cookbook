@@ -27,7 +27,7 @@ platforms:
       package:
         checksum:
           amazon:
-            "2014": "5561c6452f82d0b3d204e30d1943c017bfe2829036c86e2538f296ce0800dde5"
+            "2014": "bb9603a3bee26d9d703c6d73272edbf64bbf17a0d6346c5dc2ba21928019eb08"
 suites:
 - name: default
   run_list:
@@ -43,7 +43,7 @@ suites:
         version:
           major: 1
           minor: 5
-          incremental: 0
+          incremental: 1
     stanchion:
       package:
         version:
@@ -57,7 +57,7 @@ suites:
           minor: 0
           incremental: 2
     riak:
-      cs_version: "1.5.0"
+      cs_version: "1.5.1"
       package:
         version:
           major: 1
@@ -81,7 +81,7 @@ suites:
         version:
           major: 1
           minor: 5
-          incremental: 0
+          incremental: 1
     stanchion:
       package:
         version:
