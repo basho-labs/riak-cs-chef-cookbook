@@ -1,3 +1,10 @@
+## v2.2.8
+
+* Riak CS `1.5.1` is now the default
+* Riak `1.4.10` is now the default
+* Update yum dependency to resolve GPG key issues
+* Add digitalocean to `.kitchen.cloud.yml`
+
 ## v2.2.7:
 
 * Add support for Amazon Linux.
