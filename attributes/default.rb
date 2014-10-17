@@ -70,6 +70,7 @@ default['riak_cs']['config']['riak_cs']['gc_paginated_indexes'] = true
 default['riak_cs']['config']['riak_cs']['gc_retry_interval'] = 21600
 default['riak_cs']['config']['riak_cs']['trust_x_forwarded_for'] = false
 default['riak_cs']['config']['riak_cs']['dtrace_support'] = false
+default['riak_cs']['config']['riak_cs']['max_buckets_per_user'] = 100
 
 #webmachine
 default['riak_cs']['config']['webmachine']['server_name'] = "Riak CS".to_erl_string
