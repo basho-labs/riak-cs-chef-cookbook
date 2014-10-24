@@ -23,7 +23,7 @@ platforms:
       package:
         checksum:
           amazon:
-            "2014": "bb9603a3bee26d9d703c6d73272edbf64bbf17a0d6346c5dc2ba21928019eb08"
+            "2014": "108d9cb5487a6394e311e51153d0ab505962e14777c764da50c10c6084380266"
 - name: ubuntu-14-04-x64
   driver:
     name: digitalocean
@@ -66,7 +66,7 @@ suites:
         version:
           major: 1
           minor: 5
-          incremental: 1
+          incremental: 2
     stanchion:
       package:
         version:
@@ -80,7 +80,7 @@ suites:
           minor: 0
           incremental: 2
     riak:
-      cs_version: "1.5.1"
+      cs_version: "1.5.2"
       package:
         version:
           major: 1
@@ -104,7 +104,7 @@ suites:
         version:
           major: 1
           minor: 5
-          incremental: 1
+          incremental: 2
     stanchion:
       package:
         version:
