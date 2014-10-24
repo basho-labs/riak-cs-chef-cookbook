@@ -31,7 +31,7 @@ The default recipe installs open source Riak CS from a package. Debian, Ubuntu, 
 # package.rb
 node['riak_cs']['package']['version']['major'] = "1"
 node['riak_cs']['package']['version']['minor'] = "5"
-node['riak_cs']['package']['version']['incremental'] = "1"
+node['riak_cs']['package']['version']['incremental'] = "2"
 ```
 
 ### Enterprise Installation
