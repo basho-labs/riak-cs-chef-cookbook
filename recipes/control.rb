@@ -23,12 +23,10 @@ platform_version = node['platform_version'].to_i
 package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build']}"
 
 case node['platform_family']
-when "debian"
-  apt_repository "basho" do
-    uri "http://apt.basho.com"
-    distribution (node['lsb']['codename'] == "raring" ? "precise" : node['lsb']['codename'])
-    components ["main"]
-    key "http://apt.basho.com/gpg/basho.apt.key"
+when "debian", "ubuntu"
+
+  packagecloud_repo "basho/riak-cs" do
+    type "deb"
   end
 
   package "riak-cs-control" do
