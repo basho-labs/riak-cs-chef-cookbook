@@ -1,3 +1,12 @@
+## v2.2.11
+
+* Riak CS `1.5.4` is now the default
+* Update Gemfile dependencies
+
+## v2.2.10
+
+* Fix incremental package version attribute
+
 ## v2.2.9
 
 * Riak CS 1.5.2 is now the default
