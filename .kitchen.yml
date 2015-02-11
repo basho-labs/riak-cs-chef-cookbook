@@ -22,7 +22,7 @@ platforms:
       package:
         checksum:
           ubuntu:
-            trusty: "303a86d8f7af94dde24eb616d21542cc8982651d0c84bacbf4844447de4aaa58"
+            trusty: "48ef3dc830c2ff154efe3b6056eb0f7327bd44453814a24e269f0654bb46dd85"
 - name: ubuntu-12.04
   run_list:
   - recipe[apt]
@@ -36,7 +36,7 @@ platforms:
       package:
         checksum:
           ubuntu:
-            precise: "525eb0d96ff2d41c0830ff6d421b20282adbb01e27e19649ec6357ab5962fee9"
+            precise: "befaf44e179d104d75273d3b329e7346d2e9305d133119bd68b5353c6957ff5d"
 - name: debian-7.2.0
   run_list:
   - recipe[apt]
@@ -50,7 +50,7 @@ platforms:
       package:
         checksum:
           debian:
-            "7": "54c8a3d5f2beecd5e3cb09296802d6bdc1d35f6f10ff0be96b168d9a9d7430f1"
+            "7": "614926e2226b129996f5a578a3e8438ed4baaed0aa543047dea367b8c97a9d73"
 - name: centos-6.5
   run_list:
   - recipe[yum-epel]
@@ -64,7 +64,7 @@ platforms:
       package:
         checksum:
           centos:
-            "6": "108d9cb5487a6394e311e51153d0ab505962e14777c764da50c10c6084380266"
+            "6": "fe3786e58083ec8bc6853a926631145955313c395be028b34e45332e74d77c11"
 - name: centos-5.10
   run_list:
   - recipe[yum-epel]
@@ -78,7 +78,7 @@ platforms:
       package:
         checksum:
           centos:
-            "5": "53249f8a24a882d8f0bceebadf8309909b506e1ae8863982d2425632573e9b10"
+            "5": "89536b8bc2318f764ea4daef36c74d74b27f40e783b0ff014e2bfda8b08c4029"
 
 suites:
 - name: default
@@ -95,7 +95,7 @@ suites:
         version:
           major: 1
           minor: 5
-          incremental: 2
+          incremental: 4
     stanchion:
       package:
         version:
@@ -109,12 +109,12 @@ suites:
           minor: 0
           incremental: 2
     riak:
-      cs_version: "1.5.2"
+      cs_version: "1.5.4"
       package:
         version:
           major: 1
           minor: 4
-          incremental: 10
+          incremental: 12
       config:
         riak_kv:
           storage_backend: riak_cs_kv_multi_backend
@@ -151,7 +151,7 @@ suites:
         version:
           major: 1
           minor: 4
-          incremental: 10
+          incremental: 12
       config:
         riak_kv:
           storage_backend: riak_cs_kv_multi_backend
@@ -226,7 +226,7 @@ suites:
         version:
           major: 1
           minor: 4
-          incremental: 8
+          incremental: 12
         enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
       config:
         riak_kv:
