@@ -23,7 +23,7 @@ platforms:
       package:
         checksum:
           amazon:
-            "2014": "108d9cb5487a6394e311e51153d0ab505962e14777c764da50c10c6084380266"
+            "2014": "fe3786e58083ec8bc6853a926631145955313c395be028b34e45332e74d77c11"
 - name: ubuntu-14-04-x64
   driver:
     name: digitalocean
@@ -66,7 +66,7 @@ suites:
         version:
           major: 1
           minor: 5
-          incremental: 2
+          incremental: 4
     stanchion:
       package:
         version:
@@ -80,7 +80,7 @@ suites:
           minor: 0
           incremental: 2
     riak:
-      cs_version: "1.5.2"
+      cs_version: "1.5.4"
       package:
         version:
           major: 1
@@ -104,7 +104,7 @@ suites:
         version:
           major: 1
           minor: 5
-          incremental: 2
+          incremental: 4
     stanchion:
       package:
         version:
@@ -122,7 +122,7 @@ suites:
         version:
           major: 1
           minor: 4
-          incremental: 10
+          incremental: 12
         enterprise_key: <%= (ENV["RIAK_ENTERPRISE_KEY"].nil? ? "" : ENV["RIAK_ENTERPRISE_KEY"]) %>
       config:
         riak_kv:
