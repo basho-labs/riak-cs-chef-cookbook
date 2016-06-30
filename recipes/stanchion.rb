@@ -26,7 +26,7 @@ package_version = "#{version_str}-#{node['riak_cs']['package']['version']['build
 
 case node['platform']
 when "debian","ubuntu"
-  packagecloud_repo "basho/riak-cs" do
+  packagecloud_repo "basho/stanchion" do
     type "deb"
   end
 
@@ -41,7 +41,7 @@ when "redhat","centos"
     platform_version = 5
   end
 
-  packagecloud_repo "basho/riak-cs" do
+  packagecloud_repo "basho/stanchion" do
     type "rpm"
   end
 
@@ -89,7 +89,7 @@ when "fedora"
     owner "root"
     mode 0644
     not_if { File.exists?("#{Chef::Config[:file_cache_path]}/#{package_file}") }
-  end  
+  end
 
   package package_name do
     source "#{Chef::Config[:file_cache_path]}/#{package_file}"
